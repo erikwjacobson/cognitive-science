@@ -16,13 +16,18 @@ class CreateDegreesTable extends Migration
         Schema::create('degrees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('minor');
+            $table->string('minor')->nullable();
+            $table->string('concentration')->nullable();
             $table->integer('university_id')->unsigned();
+            $table->integer('department_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('university_id')
                 ->references('id')
                 ->on('universities');
+            $table->foreign('department_id')
+                ->references('id')
+                ->on('departments');
         });
     }
 

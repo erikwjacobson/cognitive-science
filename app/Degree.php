@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Degree extends Model
 {
+    protected $fillable = ['name', 'minor', 'concentration', 'university_id', 'department_id'];
+
     /**
      * Each degree belongs to a university
      *
@@ -24,5 +26,15 @@ class Degree extends Model
     public function courses()
     {
         return $this->hasMany(Course::class);
+    }
+
+    /**
+     * Each degree belongs to a department
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

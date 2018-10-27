@@ -19,6 +19,7 @@
                 </ul>
             </div>
             <div class="col-md-10">
+                @include('layouts.errors')
                 @yield('portalContent')
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 @section('portalContent')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><h3>|UNDER CONSTRUCTION| Degrees</h3></div>
