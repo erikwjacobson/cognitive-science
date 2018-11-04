@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
+    protected $fillable = ['name'];
+
     /**
      * Each department has many courses
      *
@@ -19,11 +21,11 @@ class Department extends Model
     /**
      * Each department belongs to many universities
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function universities()
     {
-        return $this->hasManyThrough(University::class,'university_department');
+        return $this->belongsToMany(University::class,'university_department_degree', 'department_id', 'university_id');
     }
 
     /**
@@ -34,5 +36,15 @@ class Department extends Model
     public function metaCourses()
     {
         return $this->hasMany(MetaCourse::class);
+    }
+
+    /**
+     * Each department has many degrees
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function degrees()
+    {
+        return $this->hasMany(Degree::class);
     }
 }

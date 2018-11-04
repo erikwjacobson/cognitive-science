@@ -18,16 +18,6 @@ class CreateDepartmentsTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
-
-        Schema::create('university_department', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('department_id')->unsigned();
-            $table->integer('university_id')->unsigned();
-            $table->timestamps();
-
-            $table->foreign('department_id')->references('id')->on('departments');
-            $table->foreign('university_id')->references('id')->on('universities');
-        });
     }
 
     /**
@@ -37,7 +27,6 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('university_department');
         Schema::dropIfExists('departments');
     }
 }

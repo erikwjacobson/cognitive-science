@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('degree.index');
 });
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
@@ -21,17 +21,11 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/degree/index', 'DegreeController@index')->name('degree.index');
 Route::get('/degree/create', 'DegreeController@create')->name('degree.create');
 Route::post('/degree/store', 'DegreeController@store')->name('degree.store');
-Route::get('/degree/edit', 'DegreeController@edit')->name('degree.edit');
-Route::put('/degree/update', 'DegreeController@update')->name('degree.update');
-Route::put('/degree/delete', 'DegreeController@delete')->name('degree.update');
+Route::get('/degree/{degree}/courses', 'DegreeController@courses')->name('degree.courses');
+Route::post('/degree/{degree}/courses/store', 'DegreeController@storeCourse')->name('degree.courses.store');
+Route::get('/degree/{degree}/edit', 'DegreeController@edit')->name('degree.edit');
+Route::put('/degree/{degree}/update', 'DegreeController@update')->name('degree.update');
 
-// Courses
-Route::get('/course/index', 'CourseController@index')->name('course.index');
-Route::get('/course/create', 'CourseController@create')->name('course.create');
-Route::post('/course/store', 'CourseController@store')->name('course.store');
-Route::get('/course/edit', 'CourseController@edit')->name('course.edit');
-Route::put('/course/update', 'CourseController@update')->name('course.update');
-Route::put('/course/delete', 'CourseController@delete')->name('course.update');
 
 // Meta-Courses
 Route::get('/meta-course/index', 'MetaCourseController@index')->name('meta-course.index');
