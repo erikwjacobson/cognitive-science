@@ -15,12 +15,7 @@ class CreateUniversitiesTable extends Migration
     {
         Schema::create('universities', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('IPED')->nullable();
-            $table->string('first_report')->nullable();
             $table->string('name');
-            $table->string('city');
-            $table->string('state');
-            $table->string('website');
             $table->text('details')->nullable();
             $table->timestamps();
         });

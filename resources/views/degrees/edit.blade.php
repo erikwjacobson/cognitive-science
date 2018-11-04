@@ -1,7 +1,7 @@
 @extends('layouts.portal')
 @section('portalContent')
     <div class="container">
-        {!! Form::open(['route' => ['degree.store'], 'method' => 'POST']) !!}
+        {!! Form::open(['route' => ['degree.update', $degree], 'method' => 'PUT']) !!}
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -12,10 +12,10 @@
                                 <a href="{{route('degree.index')}}" class="nav-link">List</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('degree.create')}}" class="nav-link active">Degree</a>
+                                <a href="{{route('degree.edit', $degree)}}" class="nav-link active">Degree</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled">Courses</a>
+                                <a href="{{route('degree.courses', $degree)}}" class="nav-link">Courses</a>
                             </li>
                         </ul>
                     </div>
@@ -29,14 +29,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label class="required">Institution Name</label>
-                                {!! Form::text('institution-name', null, ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('institution-name', $degree->university->name, ['class' => 'form-control', 'required']) !!}
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-7">
                                 <label>Notes</label>
-                                {!! Form::textarea('details', null, ['class' => 'form-control']) !!}
+                                {!! Form::textarea('details', $degree->university->details, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <br>
@@ -49,48 +49,48 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="required">Name of Degree</label>
-                                {!! Form::text('degree-name', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('degree-name', $degree->name, ['class' => 'form-control']) !!}
                             </div>
                             <div class="col-md-6">
                                 <label class="required">Department</label>
-                                {!! Form::text('department-name', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('department-name', $degree->department->name, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Minor (if required)</label>
-                                {!! Form::text('degree-minor', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('degree-minor', $degree->minor, ['class' => 'form-control']) !!}
                             </div>
                             <div class="col-md-6">
                                 <label>Concentration (if applicable)</label>
-                                {!! Form::text('degree-concentration', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('degree-concentration', $degree->concentration, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Total Degree Credits</label>
-                                {!! Form::number('degree-credits', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('degree-credits', $degree->degree_credits, ['class' => 'form-control']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label>Total Major Credits</label>
-                                {!! Form::number('major-credits', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('major-credits', $degree->major_credits, ['class' => 'form-control']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label>Total Prerequisite Credits</label>
-                                {!! Form::number('prereq-credits', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('prereq-credits', $degree->prereq_credits, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Total Elective Credits</label>
-                                {!! Form::number('elective-credits', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('elective-credits', $degree->elective_credits, ['class' => 'form-control']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label>Total General Ed Credits</label>
-                                {!! Form::number('gened-credits', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('gened-credits', $degree->gened_credits, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <br>

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+
+    protected $fillable = ['title', 'code', 'number', 'credits', 'course_type_id', 'department_id', 'degree_id', 'standardized_title', 'requirement_score', 'notes'];
+
     /**
      * Each course belongs to a degree
      *
