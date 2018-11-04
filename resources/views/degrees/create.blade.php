@@ -15,7 +15,10 @@
                                 <a href="{{route('degree.create')}}" class="nav-link active">Degree</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled">Courses</a>
+                                <a class="nav-link disabled"
+                                   data-toggle="tooltip"
+                                   data-title="Finish creating the degree before adding courses."
+                                   data-placement="bottom">Courses</a>
                             </li>
                         </ul>
                     </div>
