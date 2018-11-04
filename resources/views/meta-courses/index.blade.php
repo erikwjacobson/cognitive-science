@@ -2,17 +2,49 @@
 
 @section('portalContent')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header"><h3>|UNDER CONSTRUCTION| Meta-Courses</h3></div>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h2>Meta Courses</h2>
+                                <p>Meta courses are used to represent courses that are common among the
+                                cognitive science majors in the United States.</p>
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <a href="{{route('meta-course.create')}}" class="btn btn-primary">Create New</a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <h3>Ideas for Meta-Courses Index</h3>
-                        <ul>
-                            <li>Recently updated info</li>
-                            <li>Some indicator of progress? (might not be doable)</li>
-                            <li>List of Meta-Courses</li>
-                        </ul>
+                        <table class="table" id="current-courses">
+                            <thead>
+                            <tr>
+                                <th scope="col">Code</th>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Credits</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($metaCourses as $metaCourse)
+                                <tr>
+                                    <td>{{$metaCourse->code}}</td>
+                                    <td>{{$metaCourse->number}}</td>
+                                    <td>{{$metaCourse->title}}</td>
+                                    <td>{{$metaCourse->credits}}</td>
+                                    <td>TODO</td>
+                                    {{--<td><a href="{{route('meta-course.edit', $metaCourse)}}" class="btn btn-warning">Edit</a></td>--}}
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4">No meta courses entered yet. <a href="{{route('meta-course.create')}}">Create a new one</a>.</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

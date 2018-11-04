@@ -9,6 +9,8 @@ class Course extends Model
 
     protected $fillable = ['title', 'code', 'number', 'credits', 'course_type_id', 'department_id', 'degree_id', 'standardized_title', 'requirement_score', 'notes'];
 
+    protected $appends = ['uniqueName'];
+
     /**
      * Each course belongs to a degree
      *
@@ -57,6 +59,15 @@ class Course extends Model
     public function getDepartmentAttribute()
     {
         return $this->department->name;
+    }
+
+    /**
+     * Get the unique name attribute
+     * @return mixed
+     */
+    public function getUniqueNameAttribute()
+    {
+        return $this->title .  ' at ' . $this->degree->university->name;
     }
 
     /**
