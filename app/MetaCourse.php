@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class MetaCourse extends Model
 {
+    protected $fillable = ['title', 'code', 'number', 'credits', 'course_type_id', 'department_id', 'requirement_score', 'notes'];
+
     /**
      * Each course belongs to one department
      *
@@ -29,10 +31,10 @@ class MetaCourse extends Model
     /**
      * Each meta courses can have multiple courses
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function courses()
     {
-        return $this->hasManyThrough(Course::class, 'course_meta_course');
+        return $this->belongsToMany(Course::class, 'course_meta_course');
     }
 }

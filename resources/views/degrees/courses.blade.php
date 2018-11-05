@@ -160,7 +160,12 @@
                     '<td>TODO</td>' +
                 '</tr>';
 
-            $('#current-courses > tbody > tr:first').before(tableStr);
+            var firstRow = $('#current-courses > tbody > tr:first');
+            if(firstRow === undefined) {
+                $('#current-courses > tbody').append(tableStr);
+            } else {
+                firstRow.before(tableStr);
+            }
         }
     </script>
 @endsection

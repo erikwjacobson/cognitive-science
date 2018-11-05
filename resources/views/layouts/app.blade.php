@@ -17,6 +17,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -36,6 +37,7 @@
         </main>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -44,7 +46,9 @@
         });
 
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('.select2-multiple').select2();
         })
     </script>
     @yield('scripts')

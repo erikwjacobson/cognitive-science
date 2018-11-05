@@ -15,12 +15,14 @@ class CreateMetaCoursesTable extends Migration
     {
         Schema::create('meta_courses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('title');
             $table->string('code');
+            $table->integer('number');
             $table->string('credits');
             $table->integer('course_type_id')->unsigned();
             $table->integer('department_id')->unsigned();
-            $table->float('requirement_score');
+            $table->float('requirement_score')->nullable();
+            $table->string('notes')->nullable();
             $table->timestamps();
 
             $table->foreign('course_type_id')

@@ -32,5 +32,3 @@ Route::get('/meta-course/index', 'MetaCourseController@index')->name('meta-cours
 Route::get('/meta-course/create', 'MetaCourseController@create')->name('meta-course.create');
 Route::post('/meta-course/store', 'MetaCourseController@store')->name('meta-course.store');
 Route::get('/meta-course/edit', 'MetaCourseController@edit')->name('meta-course.edit');
-Route::put('/meta-course/update', 'MetaCourseController@update')->name('meta-course.update');
-Route::put('/meta-course/delete', 'MetaCourseController@delete')->name('meta-course.update');
