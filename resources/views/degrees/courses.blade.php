@@ -147,6 +147,7 @@
                 },
                 success: function(data) {
                     $('.form-control').val(null);
+                    $('#course-type').val(1);
                     displayCourse(data);
                     $('#title').focus();
                 },
