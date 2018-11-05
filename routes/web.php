@@ -23,6 +23,7 @@ Route::get('/degree/create', 'DegreeController@create')->name('degree.create');
 Route::post('/degree/store', 'DegreeController@store')->name('degree.store');
 Route::get('/degree/{degree}/courses', 'DegreeController@courses')->name('degree.courses');
 Route::post('/degree/{degree}/courses/store', 'DegreeController@storeCourse')->name('degree.courses.store');
+Route::delete('/degree/{degree}/course/{course}/delete', 'DegreeController@deleteCourse')->name('degree.delete');
 Route::get('/degree/{degree}/edit', 'DegreeController@edit')->name('degree.edit');
 Route::put('/degree/{degree}/update', 'DegreeController@update')->name('degree.update');
 

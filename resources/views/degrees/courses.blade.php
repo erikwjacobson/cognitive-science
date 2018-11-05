@@ -93,7 +93,11 @@
                                             <td>{{$course->title}}</td>
                                             <td>{{$course->credits}}</td>
                                             <td>{{$course->requirement_score}}</td>
-                                            <td>TODO</td>
+                                            <td>
+                                                {!! Form::open(['route' => ['degree.delete', $degree, $course], 'method' => 'DELETE']) !!}
+                                                    <button id="deleteCourse" type="submit" class="btn btn-danger">x</button>
+                                                {!! Form::close() !!}
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -105,16 +109,24 @@
             </div>
         </div>
     </div>
-    <template id="course-template">
-        <div class="card" style="display: none;">
-            <div class="card-body">
-
-            </div>
-        </div>
-    </template>
+    <div id="course-delete-template" style="display: none;">
+        {!! Form::open(['route' => ['degree.delete', $degree, '9999999999'], 'method' => 'DELETE']) !!}
+            <button id="deleteCourse" type="submit" class="btn btn-danger">x</button>
+        {!! Form::close() !!}
+    </div>
 @endsection
 @section('portalScripts')
     <script>
+        /**
+         * Create confirm when clicking delete button on course
+         */
+        function confirmCourse() {
+            $('#deleteCourse').on('click', function() {
+                confirm('Are you sure you want to delete this course?');
+            });
+        }
+        confirmCourse();
+
         /**
          * Ajax submit of the course
          */
@@ -151,6 +163,7 @@
         {
             $('#current-courses > tbody > tr').removeClass('table-success');
 
+            var button = getDeleteButton(data.id);
             var tableStr =
                 '<tr class="table-success">' +
                     '<td>' + data.code + '</td>' +
@@ -158,7 +171,7 @@
                     '<td>' + data.title + '</td>' +
                     '<td>' + data.credits + '</td>' +
                     '<td>' + data.requirement_score + '</td>' +
-                    '<td>TODO</td>' +
+                    '<td>' + button + '</td>' +
                 '</tr>';
 
             var firstRow = $('#current-courses > tbody > tr:first');
@@ -167,6 +180,21 @@
             } else {
                 firstRow.before(tableStr);
             }
+            confirmCourse();
+        }
+
+        /**
+         * Create the new delete button with the id passed in
+         *
+         * @param id
+         * @returns {*|React.DetailedReactHTMLElement<React.HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>|void|jQuery}
+         */
+        function getDeleteButton(id)
+        {
+            var button = $('#course-delete-template').html();
+            button = button.replace('9999999999', id);
+
+            return button;
         }
     </script>
 @endsection
