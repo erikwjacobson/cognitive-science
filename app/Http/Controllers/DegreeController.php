@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\CourseType;
 use App\Degree;
+use App\DegreeType;
 use App\Department;
 use App\University;
 use Illuminate\Http\Request;
@@ -30,7 +31,8 @@ class DegreeController extends Controller
     public function create()
     {
         $departments = Department::all();
-        return view('degrees.create', compact('departments'));
+        $degreeTypes = DegreeType::all();
+        return view('degrees.create', compact('departments', 'degreeTypes'));
     }
 
     /**
@@ -45,6 +47,7 @@ class DegreeController extends Controller
         ], ['details' => $request['details']]);
 
         $departments = Department::whereIn('id', $request->departments)->get();
+        $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
 
         $degree = Degree::create([
             'name' => $request['degree-name'],
@@ -59,6 +62,7 @@ class DegreeController extends Controller
         ]);
 
         $degree->departments()->sync($departments);
+        $degree->degreeTypes()->sync($degreeTypes);
 
         return redirect()->route('degree.courses', $degree);
     }
@@ -72,7 +76,8 @@ class DegreeController extends Controller
     public function edit(Degree $degree)
     {
         $departments = Department::all();
-        return view('degrees.edit', compact('degree', 'departments'));
+        $degreeTypes = DegreeType::all();
+        return view('degrees.edit', compact('degree', 'departments', 'degreeTypes'));
     }
 
     /**
@@ -89,6 +94,7 @@ class DegreeController extends Controller
         $university->details = $request['details'];
 
         $departments = Department::whereIn('id', $request->departments)->get();
+        $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
 
         $degree->name = $request['degree-name'];
         $degree->minor = $request['degree-minor'];
@@ -102,6 +108,7 @@ class DegreeController extends Controller
         $degree->save();
 
         $degree->departments()->sync($departments);
+        $degree->degreeTypes()->sync($degreeTypes);
 
         return redirect()->back();
     }

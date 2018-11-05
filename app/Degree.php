@@ -37,4 +37,14 @@ class Degree extends Model
     {
         return $this->belongsToMany(Department::class, 'degree_department');
     }
+
+    /**
+     * Each degree belongs to many degree types
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function degreeTypes()
+    {
+        return $this->belongsToMany(DegreeType::class, 'degree_degree_type');
+    }
 }

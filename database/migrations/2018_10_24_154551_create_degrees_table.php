@@ -43,6 +43,19 @@ class CreateDegreesTable extends Migration
                 ->references('id')
                 ->on('departments');
         });
+
+        Schema::create('degree_degree_type', function(Blueprint $table) {
+            $table->increments('id');
+            $table->integer('degree_id')->unsigned();
+            $table->integer('degree_type_id')->unsigned();
+
+            $table->foreign('degree_id')
+                ->references('id')
+                ->on('degrees');
+            $table->foreign('degree_type_id')
+                ->references('id')
+                ->on('degree_types');
+        });
     }
 
     /**
@@ -52,6 +65,7 @@ class CreateDegreesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('degree_degree_type');
         Schema::dropIfExists('degree_department');
         Schema::dropIfExists('degrees');
     }

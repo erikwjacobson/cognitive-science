@@ -55,8 +55,38 @@
                                 {!! Form::text('degree-name', null, ['class' => 'form-control']) !!}
                             </div>
                             <div class="col-md-6">
-                                <label class="required">Department</label>
+                                <label class="required">Department(s)</label>
                                 {!! Form::select('departments[]', $departments->pluck('name','id'), null, ['class' => 'form-control select2-multiple', 'multiple' => 'multiple']) !!}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Degree Type(s)</label>
+                                {!! Form::select('degreeTypes[]', $degreeTypes->pluck('description','id'), null, ['class' => 'form-control select2-multiple', 'multiple' => 'multiple']) !!}
+                            </div>
+                            <div class="col-md-4">
+                                <label>Total Degree Credits</label>
+                                {!! Form::number('degree-credits', null, ['class' => 'form-control']) !!}
+                            </div>
+                            <div class="col-md-4">
+                                <label>Total Major Credits</label>
+                                {!! Form::number('major-credits', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Total Prerequisite Credits</label>
+                                {!! Form::number('prereq-credits', null, ['class' => 'form-control']) !!}
+                            </div>
+                            <div class="col-md-4">
+                                <label>Total Elective Credits</label>
+                                {!! Form::number('elective-credits', null, ['class' => 'form-control']) !!}
+                            </div>
+                            <div class="col-md-4">
+                                <label>Total General Ed Credits</label>
+                                {!! Form::number('gened-credits', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <br>
@@ -68,32 +98,6 @@
                             <div class="col-md-6">
                                 <label>Concentration (if applicable)</label>
                                 {!! Form::text('degree-concentration', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Total Degree Credits</label>
-                                {!! Form::number('degree-credits', null, ['class' => 'form-control']) !!}
-                            </div>
-                            <div class="col-md-4">
-                                <label>Total Major Credits</label>
-                                {!! Form::number('major-credits', null, ['class' => 'form-control']) !!}
-                            </div>
-                            <div class="col-md-4">
-                                <label>Total Prerequisite Credits</label>
-                                {!! Form::number('prereq-credits', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Total Elective Credits</label>
-                                {!! Form::number('elective-credits', null, ['class' => 'form-control']) !!}
-                            </div>
-                            <div class="col-md-4">
-                                <label>Total General Ed Credits</label>
-                                {!! Form::number('gened-credits', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <br>
