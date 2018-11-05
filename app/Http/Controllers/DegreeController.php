@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\CourseType;
 use App\Degree;
+use App\DegreeType;
 use App\Department;
 use App\University;
 use Illuminate\Http\Request;
@@ -29,7 +30,9 @@ class DegreeController extends Controller
      */
     public function create()
     {
-        return view('degrees.create');
+        $departments = Department::all();
+        $degreeTypes = DegreeType::all();
+        return view('degrees.create', compact('departments', 'degreeTypes'));
     }
 
     /**
@@ -43,9 +46,8 @@ class DegreeController extends Controller
            'name' => $request['institution-name'],
         ], ['details' => $request['details']]);
 
-        $department = Department::firstOrCreate([
-            'name' => $request['department-name']
-        ]);
+        $departments = Department::whereIn('id', $request->departments)->get();
+        $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
 
         $degree = Degree::create([
             'name' => $request['degree-name'],
@@ -57,8 +59,10 @@ class DegreeController extends Controller
             'elective_credits' => $request['elective-credits'],
             'gened_credits' => $request['gened-credits'],
             'university_id' => $university->id,
-            'department_id' => $department->id,
         ]);
+
+        $degree->departments()->sync($departments);
+        $degree->degreeTypes()->sync($degreeTypes);
 
         return redirect()->route('degree.courses', $degree);
     }
@@ -71,7 +75,9 @@ class DegreeController extends Controller
      */
     public function edit(Degree $degree)
     {
-        return view('degrees.edit', compact('degree'));
+        $departments = Department::all();
+        $degreeTypes = DegreeType::all();
+        return view('degrees.edit', compact('degree', 'departments', 'degreeTypes'));
     }
 
     /**
@@ -87,9 +93,8 @@ class DegreeController extends Controller
         $university->name = $request['institution-name'];
         $university->details = $request['details'];
 
-        $department = Department::firstOrCreate([
-            'name' => $request['department-name']
-        ]);
+        $departments = Department::whereIn('id', $request->departments)->get();
+        $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
 
         $degree->name = $request['degree-name'];
         $degree->minor = $request['degree-minor'];
@@ -100,8 +105,10 @@ class DegreeController extends Controller
         $degree->elective_credits = $request['elective-credits'];
         $degree->gened_credits = $request['gened-credits'];
         $degree->university_id = $university->id;
-        $degree->department_id = $department->id;
         $degree->save();
+
+        $degree->departments()->sync($departments);
+        $degree->degreeTypes()->sync($degreeTypes);
 
         return redirect()->back();
     }
