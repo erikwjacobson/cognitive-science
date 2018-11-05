@@ -29,7 +29,8 @@ class DegreeController extends Controller
      */
     public function create()
     {
-        return view('degrees.create');
+        $departments = Department::all();
+        return view('degrees.create', compact('departments'));
     }
 
     /**
@@ -43,9 +44,7 @@ class DegreeController extends Controller
            'name' => $request['institution-name'],
         ], ['details' => $request['details']]);
 
-        $department = Department::firstOrCreate([
-            'name' => $request['department-name']
-        ]);
+        $departments = Department::whereIn('id', $request->departments)->get();
 
         $degree = Degree::create([
             'name' => $request['degree-name'],
@@ -57,8 +56,9 @@ class DegreeController extends Controller
             'elective_credits' => $request['elective-credits'],
             'gened_credits' => $request['gened-credits'],
             'university_id' => $university->id,
-            'department_id' => $department->id,
         ]);
+
+        $degree->departments()->sync($departments);
 
         return redirect()->route('degree.courses', $degree);
     }
@@ -71,7 +71,8 @@ class DegreeController extends Controller
      */
     public function edit(Degree $degree)
     {
-        return view('degrees.edit', compact('degree'));
+        $departments = Department::all();
+        return view('degrees.edit', compact('degree', 'departments'));
     }
 
     /**
@@ -87,9 +88,7 @@ class DegreeController extends Controller
         $university->name = $request['institution-name'];
         $university->details = $request['details'];
 
-        $department = Department::firstOrCreate([
-            'name' => $request['department-name']
-        ]);
+        $departments = Department::whereIn('id', $request->departments)->get();
 
         $degree->name = $request['degree-name'];
         $degree->minor = $request['degree-minor'];
@@ -100,8 +99,9 @@ class DegreeController extends Controller
         $degree->elective_credits = $request['elective-credits'];
         $degree->gened_credits = $request['gened-credits'];
         $degree->university_id = $university->id;
-        $degree->department_id = $department->id;
         $degree->save();
+
+        $degree->departments()->sync($departments);
 
         return redirect()->back();
     }

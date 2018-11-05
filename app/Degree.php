@@ -31,10 +31,10 @@ class Degree extends Model
     /**
      * Each degree belongs to a department
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function department()
+    public function departments()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsToMany(Department::class, 'degree_department');
     }
 }

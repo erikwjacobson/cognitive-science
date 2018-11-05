@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="required">Department</label>
-                                {!! Form::text('department-name', null, ['class' => 'form-control']) !!}
+                                {!! Form::select('departments[]', $departments->pluck('name','id'), null, ['class' => 'form-control select2-multiple', 'multiple' => 'multiple']) !!}
                             </div>
                         </div>
                         <br>
