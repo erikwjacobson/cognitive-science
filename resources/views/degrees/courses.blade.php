@@ -136,6 +136,7 @@
                 success: function(data) {
                     $('.form-control').val(null);
                     displayCourse(data);
+                    $('#title').focus();
                 },
                 error: function(e) {
                     console.log(e);
@@ -161,7 +162,7 @@
                 '</tr>';
 
             var firstRow = $('#current-courses > tbody > tr:first');
-            if(firstRow === undefined) {
+            if(firstRow[0] === undefined) {
                 $('#current-courses > tbody').append(tableStr);
             } else {
                 firstRow.before(tableStr);
