@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Domain</label>
-                                {!! Form::text('course[department]', null, ['class' => 'form-control', 'id' => 'department']) !!}
+                                {!! Form::select('department', $departments->pluck('name','id'), null, ['class' => 'form-control', 'id' => 'department']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label>Standard Title</label>
@@ -148,6 +148,7 @@
                 success: function(data) {
                     $('.form-control').val(null);
                     $('#course-type').val(1);
+                    $('#department').val(1),
                     displayCourse(data);
                     $('#title').focus();
                 },
