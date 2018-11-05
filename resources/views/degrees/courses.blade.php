@@ -94,8 +94,8 @@
                                             <td>{{$course->credits}}</td>
                                             <td>{{$course->requirement_score}}</td>
                                             <td>
-                                                {!! Form::open(['route' => ['degree.delete', $degree, $course], 'method' => 'DELETE']) !!}
-                                                    <button id="deleteCourse" type="submit" class="btn btn-danger">x</button>
+                                                {!! Form::open(['route' => ['degree.course.delete', $degree, $course], 'method' => 'DELETE', 'onsubmit' => 'return confirm(\'Are you sure you want to delete this course?\');']) !!}
+                                                    <button type="submit" class="btn btn-danger">x</button>
                                                 {!! Form::close() !!}
                                             </td>
                                         </tr>
@@ -110,23 +110,13 @@
         </div>
     </div>
     <div id="course-delete-template" style="display: none;">
-        {!! Form::open(['route' => ['degree.delete', $degree, '9999999999'], 'method' => 'DELETE']) !!}
-            <button id="deleteCourse" type="submit" class="btn btn-danger">x</button>
+        {!! Form::open(['route' => ['degree.course.delete', $degree, '9999999999'], 'method' => 'DELETE', 'onsubmit' => 'return confirm(\'Are you sure you want to delete this course?\');']) !!}
+            <button type="submit" class="btn btn-danger">x</button>
         {!! Form::close() !!}
     </div>
 @endsection
 @section('portalScripts')
     <script>
-        /**
-         * Create confirm when clicking delete button on course
-         */
-        function confirmCourse() {
-            $('#deleteCourse').on('click', function() {
-                confirm('Are you sure you want to delete this course?');
-            });
-        }
-        confirmCourse();
-
         /**
          * Ajax submit of the course
          */
@@ -182,7 +172,6 @@
             } else {
                 firstRow.before(tableStr);
             }
-            confirmCourse();
         }
 
         /**
