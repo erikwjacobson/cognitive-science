@@ -147,5 +147,17 @@ class DegreeController extends Controller
 
         return response($course, 200);
     }
+
+
+    public function deleteCourse(Degree $degree, Course $course, Request $request)
+    {
+        try {
+            $course->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('error', 'Cannot delete this course because it is a part of a meta course. Please delete the meta course before proceeding.');
+        }
+
+        return redirect()->back();
+    }
 }
 
