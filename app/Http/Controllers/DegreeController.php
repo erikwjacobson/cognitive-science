@@ -115,7 +115,7 @@ class DegreeController extends Controller
     {
         $courseTypes = CourseType::all();
         $departments = Department::all();
-        $courses = $degree->courses;
+        $courses = $degree->courses()->orderBy('created_at', 'DESC')->get();
         return view('degrees.courses', compact('degree', 'courseTypes', 'departments', 'courses'));
     }
 
