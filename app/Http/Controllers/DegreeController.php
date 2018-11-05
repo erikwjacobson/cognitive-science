@@ -135,9 +135,7 @@ class DegreeController extends Controller
      */
     public function storeCourse(Degree $degree, Request $request)
     {
-        $department = Department::firstOrCreate([
-            'name' => $request->department
-        ]);
+        $department = Department::findOrFail($request->department);
 
         $course = Course::firstOrCreate([
             'title' => $request->title,

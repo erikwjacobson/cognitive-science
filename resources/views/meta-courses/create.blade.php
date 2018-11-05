@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Domain</label>
-                                {!! Form::text('department', null, ['class' => 'form-control', 'id' => 'department']) !!}
+                                {!! Form::select('department', $departments->pluck('name','id'), null, ['class' => 'form-control', 'id' => 'department']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label>Requirement Score</label>
@@ -59,7 +59,7 @@
                             <div class="col-md-12">
                                 <label for="courses">Courses</label>
                                 <select id="courses" class="form-control select2-multiple" name="courses[]" multiple="multiple">
-                                    @foreach($departments as $dept)
+                                    @foreach($courseDepartments as $dept)
                                         <optgroup label="{{$dept->name}}">
                                             @foreach($courses->where('department_id', $dept->id) as $course)
                                                 <option value="{{$course->id}}">{{$course->uniqueName}}</option>

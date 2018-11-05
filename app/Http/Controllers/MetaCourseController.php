@@ -29,17 +29,16 @@ class MetaCourseController extends Controller
     {
         $courseTypes = CourseType::all();
         $courses = Course::with('degree.university')->get();
-        $departments = Department::whereIn('id', $courses->pluck('department_id'))->get();
+        $departments = Department::all();
+        $courseDepartments = $departments->whereIn('id', $courses->pluck('department_id'));
 
-        return view('meta-courses.create', compact('courseTypes', 'courses', 'departments'));
+        return view('meta-courses.create', compact('courseTypes', 'courses', 'departments', 'courseDepartments'));
     }
 
 
     public function store(Request $request)
     {
-        $department = Department::firstOrCreate([
-            'name' => $request->department
-        ]);
+        $department = Department::findOrFail($request->department);
 
         $metaCourse = MetaCourse::firstOrCreate([
             'title' => $request->title,
