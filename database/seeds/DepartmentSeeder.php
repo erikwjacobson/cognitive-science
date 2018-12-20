@@ -13,13 +13,32 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         $a = [
-            ['name' => 'Psychology'],
-            ['name' => 'Philosophy'],
-            ['name' => 'Biology'],
-            ['name' => 'Computer Science'],
-            ['name' => 'Cognitive Science'],
-            ['name' => 'Linguistics'],
             ['name' => 'Anthropology'],
+            ['name' => 'Audiology & Speech Pathology'],
+            ['name' => 'Biology'],
+            ['name' => 'Biomedical Sciences'],
+            ['name' => 'Chemistry'],
+            ['name' => 'Cognitive Science'],
+            ['name' => 'Communications'],
+            ['name' => 'Computer Science'],
+            ['name' => 'Economics'],
+            ['name' => 'Education'],
+            ['name' => 'Engineering'],
+            ['name' => 'English'],
+            ['name' => 'Informatics & Information Science'],
+            ['name' => 'Interdisciplinary Studies'],
+            ['name' => 'Kinesiology'],
+            ['name' => 'Linguistics'],
+            ['name' => 'Management'],
+            ['name' => 'Mathematics & Statistics'],
+            ['name' => 'Music'],
+            ['name' => 'Neuroscience'],
+            ['name' => 'Philosophy'],
+            ['name' => 'Physics'],
+            ['name' => 'Political Science'],
+            ['name' => 'Psychology'],
+            ['name' => 'Sociology'],
+            ['name' => 'Other'],
         ];
 
         foreach($a as $dept) {

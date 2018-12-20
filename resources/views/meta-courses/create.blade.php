@@ -17,19 +17,19 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Course Title</label>
-                                {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title']) !!}
+                                {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Intro to Psychology']) !!}
                             </div>
                             <div class="col-md-3">
                                 <label>Code</label>
-                                {!! Form::text('code', null, ['class' => 'form-control', 'id' => 'code']) !!}
+                                {!! Form::text('code', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'PSYC']) !!}
                             </div>
                             <div class="col-md-3">
                                 <label>Number</label>
-                                {!! Form::text('number', null, ['class' => 'form-control', 'id' => 'number']) !!}
+                                {!! Form::text('number', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => '101']) !!}
                             </div>
                             <div class="col-md-2">
                                 <label>Credits</label>
-                                {!! Form::text('credits', null, ['class' => 'form-control', 'id' => 'credits']) !!}
+                                {!! Form::text('credits', null, ['class' => 'form-control', 'id' => 'credits', 'placeholder' => '4']) !!}
                             </div>
                         </div>
                         <br>

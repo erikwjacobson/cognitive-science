@@ -8,8 +8,8 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-10">
-                                <h2>Meta Courses</h2>
-                                <p>Meta courses are used to represent courses that are common among the
+                                <h2>Standardized Courses</h2>
+                                <p>Standardized courses are used to represent courses that are common among the
                                 cognitive science majors in the United States.</p>
                             </div>
                             <div class="col-md-2 text-right">
@@ -40,7 +40,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4">No meta courses entered yet. <a href="{{route('meta-course.create')}}">Create a new one</a>.</td>
+                                    <td colspan="4">No standardized courses entered yet. <a href="{{route('meta-course.create')}}">Create a new one</a>.</td>
                                 </tr>
                             @endforelse
                             </tbody>

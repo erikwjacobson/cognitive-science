@@ -22,30 +22,17 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3>Institution/University</h3>
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="required">Institution Name</label>
-                                {!! Form::text('institution-name', $degree->university->name, ['class' => 'form-control', 'required']) !!}
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-7">
-                                <label>Notes</label>
-                                {!! Form::textarea('details', $degree->university->details, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-12">
                                 <h3>Degree</h3>
                                 <hr>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="required">University Name</label>
+                                {!! Form::select('institution', $universities->pluck('name','id'), $degree->university_id, ['class' => 'form-control select2-single', 'required']) !!}
+                            </div>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="required">Name of Degree</label>
