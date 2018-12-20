@@ -49,6 +49,7 @@
             $('[data-toggle="tooltip"]').tooltip();
 
             $('.select2-multiple').select2();
+            $('.select2-single').select2();
         })
     </script>
     @yield('scripts')

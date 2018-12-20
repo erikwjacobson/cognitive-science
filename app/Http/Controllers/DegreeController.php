@@ -9,6 +9,7 @@ use App\DegreeType;
 use App\Department;
 use App\University;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\UnintentionallyCoveredCodeError;
 
 class DegreeController extends Controller
 {
@@ -32,7 +33,8 @@ class DegreeController extends Controller
     {
         $departments = Department::all();
         $degreeTypes = DegreeType::all();
-        return view('degrees.create', compact('departments', 'degreeTypes'));
+        $universities = University::all();
+        return view('degrees.create', compact('departments', 'degreeTypes', 'universities'));
     }
 
     /**
@@ -42,10 +44,7 @@ class DegreeController extends Controller
      */
     public function store(Request $request)
     {
-        $university = University::firstOrCreate([
-           'name' => $request['institution-name'],
-        ], ['details' => $request['details']]);
-
+        $university = University::findOrFail($request->institution);
         $departments = Department::whereIn('id', $request->departments)->get();
         $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
 
@@ -77,7 +76,8 @@ class DegreeController extends Controller
     {
         $departments = Department::all();
         $degreeTypes = DegreeType::all();
-        return view('degrees.edit', compact('degree', 'departments', 'degreeTypes'));
+        $universities = University::all();
+        return view('degrees.edit', compact('degree', 'departments', 'degreeTypes', 'universities'));
     }
 
     /**
@@ -89,10 +89,7 @@ class DegreeController extends Controller
      */
     public function update(Degree $degree, Request $request)
     {
-        $university = $degree->university;
-        $university->name = $request['institution-name'];
-        $university->details = $request['details'];
-
+        $university = University::findOrFail($request['institution']);
         $departments = Department::whereIn('id', $request->departments)->get();
         $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
 

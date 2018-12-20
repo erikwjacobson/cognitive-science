@@ -22,19 +22,19 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Course Title</label>
-                                {!! Form::text('course[title]', null, ['class' => 'form-control', 'id' => 'title']) !!}
+                                {!! Form::text('course[title]', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Intro to Psychology']) !!}
                             </div>
                             <div class="col-md-3">
                                 <label>Code</label>
-                                {!! Form::text('course[code]', null, ['class' => 'form-control', 'id' => 'code']) !!}
+                                {!! Form::text('course[code]', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'PSYC']) !!}
                             </div>
                             <div class="col-md-3">
                                 <label>Number</label>
-                                {!! Form::text('course[number]', null, ['class' => 'form-control', 'id' => 'number']) !!}
+                                {!! Form::text('course[number]', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => '101']) !!}
                             </div>
                             <div class="col-md-2">
                                 <label>Credits</label>
-                                {!! Form::text('course[credits]', null, ['class' => 'form-control', 'id' => 'credits']) !!}
+                                {!! Form::text('course[credits]', null, ['class' => 'form-control', 'id' => 'credits', 'placeholder' => '4']) !!}
                             </div>
                         </div>
                         <br>
@@ -44,21 +44,17 @@
                                 {!! Form::select('department', $departments->pluck('name','id'), null, ['class' => 'form-control', 'id' => 'department']) !!}
                             </div>
                             <div class="col-md-4">
-                                <label>Standard Title</label>
-                                {!! Form::text('course[standard-title]', null, ['class' => 'form-control', 'id' => 'standard-title']) !!}
-                            </div>
-                            <div class="col-md-4">
                                 <label>Requirement Score</label>
                                 {!! Form::text('course[requirement-score]', null, ['class' => 'form-control', 'id' => 'requirement-score']) !!}
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
                             <div class="col-md-4">
                                 <label>Course Type</label>
                                 {!! Form::select('course[course-type]', $courseTypes->pluck('name', 'id'), null, ['class' => 'form-control', 'id' => 'course-type']) !!}
                             </div>
-                            <div class="col-md-8">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <label>Notes</label>
                                 {!! Form::text('course[notes]', null, ['class' => 'form-control', 'id' => 'notes']) !!}
                             </div>
