@@ -14,12 +14,12 @@ class CourseTypeSeeder extends Seeder
     public function run()
     {
         $a = [
-            ['name' => 'Prerequisite', 'description' => 'This course is a prerequisite for the degree.'],
-            ['name' => 'Core', 'description' => 'This course is a core class for the degree.'],
-            ['name' => 'Required', 'description' => 'This course is a required course for the degree.'],
-            ['name' => 'Track Course', 'description' => 'This course is a track course for the degree.'],
-            ['name' => 'Elective', 'description' => 'This course is an elective course for the degree.'],
-            ['name' => 'Capstone', 'description' => 'This course is a capstone course for the degree.'],
+            ['id' => 1, 'name' => 'Prerequisite', 'description' => 'This course is a prerequisite for the degree.'],
+            ['id' => 2, 'name' => 'Core', 'description' => 'This course is a core class for the degree.'],
+            ['id' => 3, 'name' => 'Required', 'description' => 'This course is a required course for the degree.'],
+            ['id' => 4, 'name' => 'Track Course', 'description' => 'This course is a track course for the degree.'],
+            ['id' => 5, 'name' => 'Elective', 'description' => 'This course is an elective course for the degree.'],
+            ['id' => 6, 'name' => 'Capstone', 'description' => 'This course is a capstone course for the degree.'],
         ];
 
         foreach($a as $courseType) {
