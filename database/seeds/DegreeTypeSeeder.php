@@ -13,11 +13,11 @@ class DegreeTypeSeeder extends Seeder
     public function run()
     {
         $a = [
-            ['name' => 'B.S.', 'description' => 'Bachelor of Science degree'],
-            ['name' => 'B.A.', 'description' => 'Bachelor of Arts degree'],
-            ['name' => 'B.A.S.', 'description' => 'Bachelor of Applied Science degree'],
-            ['name' => 'B.I.S.', 'description' => 'Bachelor of Integrated Studies degree'],
-            ['name' => 'B.S.S.', 'description' => 'Bachelor of Social Science degree'],
+            ['id' => 1, 'name' => 'B.S.', 'description' => 'Bachelor of Science degree'],
+            ['id' => 2, 'name' => 'B.A.', 'description' => 'Bachelor of Arts degree'],
+            ['id' => 3, 'name' => 'B.A.S.', 'description' => 'Bachelor of Applied Science degree'],
+            ['id' => 4, 'name' => 'B.I.S.', 'description' => 'Bachelor of Integrated Studies degree'],
+            ['id' => 5, 'name' => 'B.S.S.', 'description' => 'Bachelor of Social Science degree'],
         ];
 
         foreach($a as $type) {
