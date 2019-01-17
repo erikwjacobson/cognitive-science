@@ -18,11 +18,11 @@ class CreateDegreesTable extends Migration
             $table->string('name');
             $table->string('minor')->nullable();
             $table->string('concentration')->nullable();
-            $table->integer('degree_credits')->nullable();
-            $table->integer('major_credits')->nullable();
-            $table->integer('prereq_credits')->nullable();
-            $table->integer('elective_credits')->nullable();
-            $table->integer('gened_credits')->nullable();
+            $table->float('degree_credits')->nullable();
+            $table->float('major_credits')->nullable();
+            $table->float('prereq_credits')->nullable();
+            $table->float('elective_credits')->nullable();
+            $table->float('gened_credits')->nullable();
             $table->integer('university_id')->unsigned();
             $table->timestamps();
 
@@ -35,6 +35,7 @@ class CreateDegreesTable extends Migration
             $table->increments('id');
             $table->integer('degree_id')->unsigned();
             $table->integer('department_id')->unsigned();
+            $table->string('department_type');
 
             $table->foreign('degree_id')
                 ->references('id')
