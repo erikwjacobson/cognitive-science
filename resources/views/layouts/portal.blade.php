@@ -8,7 +8,7 @@
                         <a id="degree-nav" href="{{route('degree.index')}}" class="nav-link portal">Degrees</a>
                     </li>
                     <li class="nav-item">
-                        <a id="meta-course-nav" href="{{route('meta-course.index')}}" class="nav-link portal">Standardized Courses</a>
+                        <a id="meta-course-nav" href="{{route('meta-course.index')}}" class="nav-link portal">Standard Courses</a>
                     </li>
                 </ul>
             </div>

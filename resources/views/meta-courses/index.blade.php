@@ -25,6 +25,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Credits</th>
+                                <th scope="col"># of Courses</th>
                                 <th scope="col">Options</th>
                             </tr>
                             </thead>
@@ -35,8 +36,8 @@
                                     <td>{{$metaCourse->number}}</td>
                                     <td>{{$metaCourse->title}}</td>
                                     <td>{{$metaCourse->credits}}</td>
-                                    <td>TODO</td>
-                                    {{--<td><a href="{{route('meta-course.edit', $metaCourse)}}" class="btn btn-warning">Edit</a></td>--}}
+                                    <td>{{$metaCourse->courses()->count()}}</td>
+                                    <td><a href="{{route('meta-course.edit', $metaCourse)}}" class="btn btn-warning">Edit</a></td>
                                 </tr>
                             @empty
                                 <tr>
