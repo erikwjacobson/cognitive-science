@@ -44,23 +44,48 @@ class DegreeController extends Controller
      */
     public function store(Request $request)
     {
+//        return explode(" - ", $request['degree-credits'])[1];
         $university = University::findOrFail($request->institution);
-        $departments = Department::whereIn('id', $request->departments)->get();
-        $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
 
+        // Create the degree
         $degree = Degree::create([
             'name' => $request['degree-name'],
             'minor' => $request['degree-minor'],
             'concentration' => $request['degree-concentration'],
-            'degree_credits' => $request['degree-credits'],
-            'major_credits' => $request['major-credits'],
-            'prereq_credits' => $request['prereq-credits'],
-            'elective_credits' => $request['elective-credits'],
-            'gened_credits' => $request['gened-credits'],
+            'degree_credits_min' => explode(" - ", $request['degree-credits'])[0],
+            'degree_credits_max' => explode(" - ", $request['degree-credits'])[1],
+            'major_credits_min' => explode(" - ", $request['major-credits'])[0],
+            'major_credits_max' => explode(" - ", $request['major-credits'])[1],
+            'prereq_credits_min' => explode(" - ", $request['prereq-credits'])[0],
+            'prereq_credits_max' => explode(" - ", $request['prereq-credits'])[1],
+            'elective_credits_min' => explode(" - ", $request['elective-credits'])[0],
+            'elective_credits_max' => explode(" - ", $request['elective-credits'])[1],
+            'gened_credits_min' => explode(" - ", $request['gened-credits'])[0],
+            'gened_credits_max' => explode(" - ", $request['gened-credits'])[1],
             'university_id' => $university->id,
         ]);
+        $degree->save();
 
-        $degree->departments()->sync($departments);
+        // Sync all of the housed departments
+        $housed_departments = Department::whereIn('id', $request->housed_departments)->get();
+        $housed = [];
+        foreach($housed_departments as $dept){
+            $housed[$dept->id] = ['department_type' => 'housed'];
+        }
+        $degree->departments()->sync($housed);
+
+        // If there are contributing departments, sync them
+        if($request->contributing_departments) {
+            $contributing_departments = Department::whereIn('id', $request->contributing_departments)->get();
+            $contributing = [];
+            foreach($contributing_departments as $dept){
+                $contributing[$dept->id] = ['department_type' => 'contributing'];
+            }
+            $degree->departments()->sync($contributing);
+        }
+
+        // Sync the degree types
+        $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
         $degree->degreeTypes()->sync($degreeTypes);
 
         return redirect()->route('degree.courses', $degree);
