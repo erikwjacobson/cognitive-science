@@ -19,17 +19,24 @@
                                 <label>Course Title</label>
                                 {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Intro to Psychology']) !!}
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Code</label>
                                 {!! Form::text('code', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'PSYC']) !!}
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Number</label>
                                 {!! Form::text('number', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => '101']) !!}
                             </div>
-                            <div class="col-md-2">
-                                <label>Credits</label>
-                                {!! Form::text('credits', null, ['class' => 'form-control', 'id' => 'credits', 'placeholder' => '4']) !!}
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <label for="course-credits-amount">Course Credits:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="credits" id="course-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
+                                    </div>
+                                </div>
+                                <div id="course-credits"></div>
                             </div>
                         </div>
                         <br>
@@ -80,4 +87,21 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $( function() {
+            $( "#course-credits").slider({
+                range: true,
+                min: 0,
+                max: 5,
+                values: [ 0, 4 ],
+                slide: function( event, ui ) {
+                    $( "#course-credits-amount" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                }
+            });
+            $( "#course-credits-amount" ).val($( "#course-credits" ).slider( "values", 0 ) +
+                " - " + $( "#course-credits" ).slider( "values", 1 ) );
+        });
+    </script>
 @endsection

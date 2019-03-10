@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MetaCourse extends Model
 {
-    protected $fillable = ['title', 'code', 'number', 'credits', 'course_type_id', 'department_id', 'requirement_score', 'notes'];
+    protected $fillable = ['title', 'code', 'number', 'credits_min', 'credits_max', 'course_type_id', 'department_id', 'requirement_score', 'notes'];
 
     /**
      * Each course belongs to one department

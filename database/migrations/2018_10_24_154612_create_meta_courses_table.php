@@ -18,7 +18,8 @@ class CreateMetaCoursesTable extends Migration
             $table->string('title');
             $table->string('code');
             $table->integer('number');
-            $table->float('credits');
+            $table->float('credits_min');
+            $table->float('credits_max');
             $table->integer('course_type_id')->unsigned();
             $table->integer('department_id')->unsigned();
             $table->float('requirement_score')->nullable();
