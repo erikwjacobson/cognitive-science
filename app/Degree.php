@@ -6,7 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Degree extends Model
 {
-    protected $fillable = ['name', 'minor', 'concentration', 'degree_credits', 'major_credits', 'prereq_credits', 'elective_credits', 'gened_credits', 'university_id', 'department_id'];
+    protected $fillable = [
+        'name',
+        'minor',
+        'concentration',
+        'degree_credits_min',
+        'degree_credits_max',
+        'major_credits_min',
+        'major_credits_max',
+        'prereq_credits_min',
+        'prereq_credits_max',
+        'elective_credits_min',
+        'elective_credits_max',
+        'gened_credits_min',
+        'gened_credits_max',
+        'university_id',
+        'department_id'
+    ];
 
     /**
      * Each degree belongs to a university
