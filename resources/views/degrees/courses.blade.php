@@ -21,34 +21,41 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <label>Course Title</label>
+                                <label class="required">Course Title</label>
                                 {!! Form::text('course[title]', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Intro to Psychology']) !!}
                             </div>
-                            <div class="col-md-3">
-                                <label>Code</label>
+                            <div class="col-md-2">
+                                <label class="required">Code</label>
                                 {!! Form::text('course[code]', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'PSYC']) !!}
                             </div>
-                            <div class="col-md-3">
-                                <label>Number</label>
+                            <div class="col-md-2">
+                                <label class="required">Number</label>
                                 {!! Form::text('course[number]', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => '101']) !!}
                             </div>
-                            <div class="col-md-2">
-                                <label>Credits</label>
-                                {!! Form::text('course[credits]', null, ['class' => 'form-control', 'id' => 'credits', 'placeholder' => '4']) !!}
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <label for="course-credits-amount">Course Credits:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="course[credits]" id="course-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
+                                    </div>
+                                </div>
+                                <div id="course-credits"></div>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4">
-                                <label>Domain</label>
+                                <label class="required">Domain</label>
                                 {!! Form::select('department', $departments->pluck('name','id'), null, ['class' => 'form-control', 'id' => 'department']) !!}
                             </div>
                             <div class="col-md-4">
-                                <label>Requirement Score</label>
+                                <label class="required">Requirement Score</label>
                                 {!! Form::text('course[requirement-score]', null, ['class' => 'form-control', 'id' => 'requirement-score']) !!}
                             </div>
                             <div class="col-md-4">
-                                <label>Course Type</label>
+                                <label class="required">Course Type</label>
                                 {!! Form::select('course[course-type]', $courseTypes->pluck('name', 'id'), null, ['class' => 'form-control', 'id' => 'course-type']) !!}
                             </div>
                         </div>
@@ -87,7 +94,7 @@
                                             <td>{{$course->code}}</td>
                                             <td>{{$course->number}}</td>
                                             <td>{{$course->title}}</td>
-                                            <td>{{$course->credits}}</td>
+                                            <td>{{$course->credits_min}} - {{$course->credits_max}}</td>
                                             <td>{{$course->requirement_score}}</td>
                                             <td>
                                                 {!! Form::open(['route' => ['degree.course.delete', $degree, $course], 'method' => 'DELETE', 'onsubmit' => 'return confirm(\'Are you sure you want to delete this course?\');']) !!}
@@ -113,6 +120,20 @@
 @endsection
 @section('portalScripts')
     <script>
+        $( function() {
+            $( "#course-credits").slider({
+                range: true,
+                min: 0,
+                max: 5,
+                values: [ 0, 4 ],
+                slide: function( event, ui ) {
+                    $( "#course-credits-amount" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                }
+            });
+            $( "#course-credits-amount" ).val($( "#course-credits" ).slider( "values", 0 ) +
+                " - " + $( "#course-credits" ).slider( "values", 1 ) );
+        });
+
         /**
          * Ajax submit of the course
          */
@@ -124,7 +145,7 @@
                     title: $('#title').val(),
                     code: $('#code').val(),
                     number: $('#number').val(),
-                    credits: $('#credits').val(),
+                    credits: $('#course-credits-amount').val(),
                     department: $('#department').val(),
                     standard_title: $('#standard-title').val(),
                     requirement_score: $('#requirement-score').val(),
@@ -157,7 +178,7 @@
                     '<td>' + data.code + '</td>' +
                     '<td>' + data.number + '</td>' +
                     '<td>' + data.title + '</td>' +
-                    '<td>' + data.credits + '</td>' +
+                    '<td>' + data.credits_min + ' - ' + data.credits_max + '</td>' +
                     '<td>' + data.requirement_score + '</td>' +
                     '<td>' + button + '</td>' +
                 '</tr>';

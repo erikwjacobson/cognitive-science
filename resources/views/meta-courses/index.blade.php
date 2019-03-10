@@ -35,7 +35,7 @@
                                     <td>{{$metaCourse->code}}</td>
                                     <td>{{$metaCourse->number}}</td>
                                     <td>{{$metaCourse->title}}</td>
-                                    <td>{{$metaCourse->credits}}</td>
+                                    <td>{{$metaCourse->credits_min}} - {{$metaCourse->credits_max}}</td>
                                     <td>{{$metaCourse->courses()->count()}}</td>
                                     <td><a href="{{route('meta-course.edit', $metaCourse)}}" class="btn btn-warning">Edit</a></td>
                                 </tr>
