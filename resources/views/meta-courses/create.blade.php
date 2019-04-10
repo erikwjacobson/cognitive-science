@@ -30,7 +30,7 @@
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <label for="course-credits-amount">Course Credits:</label>
+                                        <label for="course-credits-amount" class="required">Course Credits:</label>
                                     </div>
                                     <div class="col-md-4">
                                         <input type="text" name="credits" id="course-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
@@ -41,15 +41,11 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Domain</label>
                                 {!! Form::select('department', $departments->pluck('name','id'), null, ['class' => 'form-control', 'id' => 'department']) !!}
                             </div>
-                            <div class="col-md-4">
-                                <label>Requirement Score</label>
-                                {!! Form::text('score', null, ['class' => 'form-control', 'id' => 'requirement-score']) !!}
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Course Type</label>
                                 {!! Form::select('type', $courseTypes->pluck('name', 'id'), null, ['class' => 'form-control', 'id' => 'course-type']) !!}
                             </div>
@@ -88,7 +84,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
+@section('portalScripts')
     <script>
         $( function() {
             $( "#course-credits").slider({

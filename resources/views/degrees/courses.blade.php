@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Create Courses for {{$degree->name}}</h3>
+                        <h3>Create Courses for {{$degree->name}} at {{$degree->university->name}}</h3>
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
                                 <a href="{{route('degree.index')}}" class="nav-link">List</a>
@@ -35,7 +35,7 @@
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <label for="course-credits-amount">Course Credits:</label>
+                                        <label for="course-credits-amount" class="required">Course Credits:</label>
                                     </div>
                                     <div class="col-md-4">
                                         <input type="text" name="course[credits]" id="course-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
@@ -50,9 +50,13 @@
                                 <label class="required">Domain</label>
                                 {!! Form::select('department', $departments->pluck('name','id'), null, ['class' => 'form-control', 'id' => 'department']) !!}
                             </div>
-                            <div class="col-md-4">
-                                <label class="required">Requirement Score</label>
-                                {!! Form::text('course[requirement-score]', null, ['class' => 'form-control', 'id' => 'requirement-score']) !!}
+                            <div class="col-md-2">
+                                <label class="required">Subgroup</label>
+                                {!! Form::select('course[subgroup]', ['NA',1,2,3,4,5,6,7,8,9,10], null, ['class' => 'form-control', 'id' => 'requirement-score-sub']) !!}
+                            </div>
+                            <div class="col-md-2">
+                                <label class="required">Group</label>
+                                {!! Form::select('course[group]', ['NA',1,2,3,4,5,6,7,8,9,10], null, ['class' => 'form-control', 'id' => 'requirement-score-group']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label class="required">Course Type</label>
@@ -75,7 +79,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-12">
-                                <h3>Current Courses for {{$degree->name}}</h3>
+                                <h3>Current Courses for {{$degree->name}} at {{$degree->university->name}}</h3>
                                 <br>
                                 <table class="table" id="current-courses">
                                     <thead>
@@ -148,14 +152,17 @@
                     credits: $('#course-credits-amount').val(),
                     department: $('#department').val(),
                     standard_title: $('#standard-title').val(),
-                    requirement_score: $('#requirement-score').val(),
+                    subgroup: $('#requirement-score-sub').val(),
+                    group: $('#requirement-score-group').val(),
                     course_type: $('#course-type').val(),
                     notes: $('#notes').val()
                 },
                 success: function(data) {
                     $('.form-control').val(null);
                     $('#course-type').val(1);
-                    $('#department').val(1),
+                    $('#department').val(1);
+                    $('#requirement-score-sub').val(0);
+                    $('#requirement-score-group').val(0);
                     displayCourse(data);
                     $('#title').focus();
                 },

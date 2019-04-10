@@ -159,6 +159,8 @@ class DegreeController extends Controller
     {
         $department = Department::findOrFail($request->department);
 
+        $requirement_score = $request->subgroup != 0 || $request->group != 0 ? $request->subgroup / $request->group : 0;
+
         $course = Course::firstOrCreate([
             'title' => $request->title,
             'code' => $request->code,
@@ -169,7 +171,7 @@ class DegreeController extends Controller
             'course_type_id' => $request->course_type,
             'degree_id' => $degree->id,
             'standardized_title' => $request->standard_title,
-            'requirement_score' => $request->requirement_score,
+            'requirement_score' => $requirement_score,
             'notes' => $request->notes
         ]);
 

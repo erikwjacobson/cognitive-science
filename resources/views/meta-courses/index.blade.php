@@ -37,7 +37,18 @@
                                     <td>{{$metaCourse->title}}</td>
                                     <td>{{$metaCourse->credits_min}} - {{$metaCourse->credits_max}}</td>
                                     <td>{{$metaCourse->courses()->count()}}</td>
-                                    <td><a href="{{route('meta-course.edit', $metaCourse)}}" class="btn btn-warning">Edit</a></td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <a href="{{route('meta-course.edit', $metaCourse)}}" class="btn btn-warning">Edit</a>
+                                            </div>
+                                            <div class="col-md-3">
+                                                {!! Form::open(['route' => ['meta-course.delete', $metaCourse], 'method' => 'DELETE', 'onsubmit' => 'return confirm(\'Are you sure you want to delete this standardized course?\');']) !!}
+                                                <button type="submit" class="btn btn-danger">x</button>
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>

@@ -53,7 +53,6 @@ class MetaCourseController extends Controller
             'credits_max' => explode(' - ', $request->credits)[1],
             'department_id' => $department->id,
             'course_type_id' => $request->type,
-            'requirement_score' => $request->score,
             'notes' => $request->notes
         ]);
 
@@ -78,23 +77,42 @@ class MetaCourseController extends Controller
         return view('meta-courses.edit', compact('metaCourse', 'departments', 'courseTypes', 'courses', 'courseDepartments', 'metaCourseCourses'));
     }
 
+    /**
+     * Update the meta course
+     * @param Request $request
+     * @param MetaCourse $metaCourse
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, MetaCourse $metaCourse)
     {
         $department = Department::findOrFail($request->department);
 
         $metaCourse->title = $request->title;
         $metaCourse->code = $request->code ;
-        $metaCourse->number= $request->number;
-        $metaCourse->credits = $request->credits;
+        $metaCourse->number = $request->number;
+        $metaCourse->credits_min = explode(' - ', $request->credits)[0];
+        $metaCourse->credits_max = explode(' - ', $request->credits)[1];
         $metaCourse->department_id = $department->id;
         $metaCourse->course_type_id = $request->type;
-        $metaCourse->requirement_score = $request->score;
         $metaCourse->notes = $request->notes;
 
         $metaCourse->courses()->sync($request->courses);
         $metaCourse->save();
 
         return redirect()->route('meta-course.index');
+    }
+
+    /**
+     * Delete the meta course
+     * @param MetaCourse $metaCourse
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function delete(MetaCourse $metaCourse)
+    {
+        $metaCourse->courses()->sync([]);
+        $metaCourse->delete();
+        return redirect()->back();
     }
 }
 
