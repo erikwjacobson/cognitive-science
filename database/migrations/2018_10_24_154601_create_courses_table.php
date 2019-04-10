@@ -23,7 +23,7 @@ class CreateCoursesTable extends Migration
             $table->integer('department_id')->unsigned();
             $table->integer('course_type_id')->unsigned();
             $table->integer('degree_id')->unsigned();
-            $table->float('requirement_score');
+            $table->float('requirement_score')->nullable();
             $table->string('notes')->nullable();
             $table->string('standardized_title')->nullable();
             $table->timestamps();
