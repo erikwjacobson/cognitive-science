@@ -65,7 +65,7 @@
                                         <label for="degree-credits-amount">Degree Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="degree-credits" id="degree-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
+                                        <input type="text" name="degree-credits" id="degree-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="degree-credits"></div>
@@ -76,7 +76,7 @@
                                         <label for="major-credits-amount">Major Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="major-credits" id="major-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
+                                        <input type="text" name="major-credits" id="major-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="major-credits"></div>
@@ -90,7 +90,7 @@
                                         <label for="prereq-credits-amount">Prereq Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="prereq-credits" id="prereq-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
+                                        <input type="text" name="prereq-credits" id="prereq-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="prereq-credits"></div>
@@ -101,7 +101,7 @@
                                         <label for="elective-credits-amount">Elective Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="elective-credits" id="elective-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
+                                        <input type="text" name="elective-credits" id="elective-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="elective-credits"></div>
@@ -111,8 +111,8 @@
                                     <div class="col-md-7">
                                         <label for="gened-credits-amount">Gen Ed Credits:</label>
                                     </div>
-                                    <div class="col-md-4">
-                                        <input type="text" name="gened-credits" id="gened-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
+                                    <div class="col-md-5">
+                                        <input type="text" name="gened-credits" id="gened-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="gened-credits"></div>
