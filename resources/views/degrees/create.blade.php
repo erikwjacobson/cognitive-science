@@ -142,7 +142,7 @@
         {{ Form::close() }}
     </div>
 @endsection
-@section('scripts')
+@section('portalScripts')
     <script>
         var sliders = ['degree-credits', 'major-credits', 'prereq-credits', 'elective-credits', 'gened-credits', 'course-credits'];
 
