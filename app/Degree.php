@@ -10,6 +10,7 @@ class Degree extends Model
         'name',
         'minor',
         'concentration',
+        'catalog_year',
         'degree_credits_min',
         'degree_credits_max',
         'major_credits_min',

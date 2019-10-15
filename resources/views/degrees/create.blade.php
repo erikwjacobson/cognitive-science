@@ -24,9 +24,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-9">
                                 <label class="required">University Name</label>
                                 {!! Form::select('institution', $universities->pluck('name','id'), null, ['class' => 'form-control select2-single', 'required']) !!}
+                            </div>
+                            <div class="col-md-3">
+                                <label class="required">Catalog Year</label>
+                                {!! Form::select('catalog-year', $catalogYears, '2019-2020', ['class' => 'form-control select2-single', 'required']) !!}
                             </div>
                         </div>
                         <br>
@@ -132,12 +136,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input name="special" class="special" type="radio" data-special="Concentrations">&nbsp;Concentrations
+                                        <input name="special" class="special" type="radio" data-special="Concentration">&nbsp;Concentration
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input name="special" class="special" type="radio" data-special="Tracks">&nbsp;Tracks
+                                        <input name="special" class="special" type="radio" data-special="Track">&nbsp;Track
                                     </div>
                                 </div>
                                 <div class="row">
@@ -146,6 +150,12 @@
                                     </div>
                                 </div>
                                 {!! Form::text('degree-concentration', null, ['class' => 'form-control', 'hidden' => 'true', 'id' => 'specialization-text']) !!}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Notes</label>
+                                {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => 4]) !!}
                             </div>
                         </div>
                         <br>

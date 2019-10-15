@@ -13,6 +13,22 @@ use PHPUnit\Framework\UnintentionallyCoveredCodeError;
 
 class DegreeController extends Controller
 {
+    public $catalogYears = [
+        '2010-2011'=> '2010-2011',
+        '2011-2012'=> '2011-2012',
+        '2012-2013'=> '2012-2013',
+        '2013-2014'=> '2013-2014',
+        '2014-2015'=> '2014-2015',
+        '2015-2016'=> '2015-2016',
+        '2016-2017'=> '2016-2017',
+        '2017-2018'=> '2017-2018',
+        '2018-2019'=> '2018-2019',
+        '2019-2020'=> '2019-2020',
+        '2020-2021'=> '2020-2021',
+        '2021-2022'=> '2021-2022',
+        '2022-2023'=> '2022-2023'
+    ];
+
     /**
      * Index of Degrees
      *
@@ -34,7 +50,8 @@ class DegreeController extends Controller
         $departments = Department::all();
         $degreeTypes = DegreeType::all();
         $universities = University::all();
-        return view('degrees.create', compact('departments', 'degreeTypes', 'universities'));
+        $catalogYears = $this->catalogYears;
+        return view('degrees.create', compact('departments', 'degreeTypes', 'universities', 'catalogYears'));
     }
 
     /**
@@ -44,7 +61,6 @@ class DegreeController extends Controller
      */
     public function store(Request $request)
     {
-//        return explode(" - ", $request['degree-credits'])[1];
         $university = University::findOrFail($request->institution);
 
         // Create the degree
@@ -52,6 +68,8 @@ class DegreeController extends Controller
             'name' => $request['degree-name'],
             'minor' => $request['degree-minor'],
             'concentration' => $request['degree-concentration'],
+            'catalog_year' => $request['catalog-year'],
+            'notes' => $request['notes'],
             'degree_credits_min' => explode(" - ", $request['degree-credits'])[0],
             'degree_credits_max' => explode(" - ", $request['degree-credits'])[1],
             'major_credits_min' => explode(" - ", $request['major-credits'])[0],
@@ -145,7 +163,8 @@ class DegreeController extends Controller
         $courseTypes = CourseType::all();
         $departments = Department::all();
         $courses = $degree->courses()->orderBy('created_at', 'DESC')->get();
-        return view('degrees.courses', compact('degree', 'courseTypes', 'departments', 'courses'));
+        $catalogYears = $this->catalogYears;
+        return view('degrees.courses', compact('degree', 'courseTypes', 'departments', 'courses', 'catalogYears'));
     }
 
     /**
@@ -157,6 +176,7 @@ class DegreeController extends Controller
      */
     public function storeCourse(Degree $degree, Request $request)
     {
+//        return $request->all();
         $department = Department::findOrFail($request->department);
 
         $requirement_score = $request->subgroup != 0 || $request->group != 0 ? $request->subgroup / $request->group : 0;
@@ -165,6 +185,7 @@ class DegreeController extends Controller
             'title' => $request->title,
             'code' => $request->code,
             'number' => $request->number,
+            'catalog_year' => $request->catalog_year,
             'credits_min' => explode(' - ', $request->credits)[0],
             'credits_max' => explode(' - ', $request->credits)[1],
             'department_id' => $department->id,

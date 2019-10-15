@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->string('code');
             $table->integer('number');
+            $table->string('catalog_year');
             $table->float('credits_min');
             $table->float('credits_max');
             $table->integer('department_id')->unsigned();

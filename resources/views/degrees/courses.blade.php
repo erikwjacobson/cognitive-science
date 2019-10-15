@@ -24,6 +24,10 @@
                                 <label class="required">Course Title</label>
                                 {!! Form::text('course[title]', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Intro to Psychology']) !!}
                             </div>
+                            <div class="col-md-4">
+                                <label class="required">Course Catalog Year</label>
+                                {!! Form::select('course[catalog_year]', $catalogYears, $degree->catalog_year, ['class' => 'form-control', 'id' => 'catalog-year']) !!}
+                            </div>
                             <div class="col-md-2">
                                 <label class="required">Code</label>
                                 {!! Form::text('course[code]', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'PSYC']) !!}
@@ -32,6 +36,9 @@
                                 <label class="required">Number</label>
                                 {!! Form::text('course[number]', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => '101']) !!}
                             </div>
+                        </div>
+                        <br>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-7">
@@ -43,9 +50,6 @@
                                 </div>
                                 <div id="course-credits"></div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
                             <div class="col-md-4">
                                 <label class="required">Domain</label>
                                 {!! Form::select('department', $departments->pluck('name','id'), null, ['class' => 'form-control', 'id' => 'department']) !!}
@@ -58,14 +62,14 @@
                                 <label class="required">Group</label>
                                 {!! Form::select('course[group]', ['NA',1,2,3,4,5,6,7,8,9,10], null, ['class' => 'form-control', 'id' => 'requirement-score-group']) !!}
                             </div>
-                            <div class="col-md-4">
-                                <label class="required">Course Type</label>
-                                {!! Form::select('course[course-type]', $courseTypes->pluck('name', 'id'), null, ['class' => 'form-control', 'id' => 'course-type']) !!}
-                            </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label class="required">Course Type</label>
+                                {!! Form::select('course[course-type]', $courseTypes->pluck('name', 'id'), null, ['class' => 'form-control', 'id' => 'course-type']) !!}
+                            </div>
+                            <div class="col-md-6">
                                 <label>Notes</label>
                                 {!! Form::text('course[notes]', null, ['class' => 'form-control', 'id' => 'notes']) !!}
                             </div>
@@ -155,6 +159,7 @@
                     subgroup: $('#requirement-score-sub').val(),
                     group: $('#requirement-score-group').val(),
                     course_type: $('#course-type').val(),
+                    catalog_year: $('#catalog-year').val(),
                     notes: $('#notes').val()
                 },
                 success: function(data) {
