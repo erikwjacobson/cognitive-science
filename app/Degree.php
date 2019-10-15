@@ -52,7 +52,7 @@ class Degree extends Model
      */
     public function departments()
     {
-        return $this->belongsToMany(Department::class, 'degree_department');
+        return $this->belongsToMany(Department::class, 'degree_department')->withPivot('department_type');
     }
 
     /**

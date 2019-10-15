@@ -152,6 +152,7 @@
                                 {!! Form::text('degree-concentration', null, ['class' => 'form-control', 'hidden' => 'true', 'id' => 'specialization-text']) !!}
                             </div>
                         </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-12">
                                 <label>Notes</label>

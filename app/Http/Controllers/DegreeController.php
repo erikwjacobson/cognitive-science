@@ -118,9 +118,12 @@ class DegreeController extends Controller
     public function edit(Degree $degree)
     {
         $departments = Department::all();
+        $contributing = $degree->departments()->wherePivot('department_type', 'contributing');
+        $housed = $degree->departments()->wherePivot('department_type', 'housed');
         $degreeTypes = DegreeType::all();
         $universities = University::all();
-        return view('degrees.edit', compact('degree', 'departments', 'degreeTypes', 'universities'));
+        $catalogYears = $this->catalogYears;
+        return view('degrees.edit', compact('degree', 'departments', 'degreeTypes', 'universities', 'contributing','housed', 'catalogYears'));
     }
 
     /**
@@ -133,21 +136,44 @@ class DegreeController extends Controller
     public function update(Degree $degree, Request $request)
     {
         $university = University::findOrFail($request['institution']);
-        $departments = Department::whereIn('id', $request->departments)->get();
         $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
 
         $degree->name = $request['degree-name'];
         $degree->minor = $request['degree-minor'];
+        $degree->catalog_year = $request['catalog-year'];
         $degree->concentration = $request['degree-concentration'];
-        $degree->degree_credits = $request['degree-credits'];
-        $degree->major_credits = $request['major-credits'];
-        $degree->prereq_credits = $request['prereq-credits'];
-        $degree->elective_credits = $request['elective-credits'];
-        $degree->gened_credits = $request['gened-credits'];
+        $degree->degree_credits_min = explode(" - ", $request['degree-credits'])[0];
+        $degree->degree_credits_max = explode(" - ", $request['degree-credits'])[1];
+        $degree->major_credits_min = explode(" - ", $request['major-credits'])[0];
+        $degree->major_credits_max = explode(" - ", $request['major-credits'])[1];
+        $degree->prereq_credits_min = explode(" - ", $request['prereq-credits'])[0];
+        $degree->prereq_credits_max = explode(" - ", $request['prereq-credits'])[1];
+        $degree->elective_credits_min = explode(" - ", $request['elective-credits'])[0];
+        $degree->elective_credits_max = explode(" - ", $request['elective-credits'])[1];
+        $degree->gened_credits_min = explode(" - ", $request['gened-credits'])[0];
+        $degree->gened_credits_max = explode(" - ", $request['gened-credits'])[1];
         $degree->university_id = $university->id;
+        $degree->nodes = $request['notes'];
         $degree->save();
 
-        $degree->departments()->sync($departments);
+        // Sync all of the housed departments
+        $housed_departments = Department::whereIn('id', $request->housed_departments)->get();
+        $housed = [];
+        foreach($housed_departments as $dept){
+            $housed[$dept->id] = ['department_type' => 'housed'];
+        }
+        $degree->departments()->sync($housed);
+
+        // If there are contributing departments, sync them
+        if($request->contributing_departments) {
+            $contributing_departments = Department::whereIn('id', $request->contributing_departments)->get();
+            $contributing = [];
+            foreach($contributing_departments as $dept){
+                $contributing[$dept->id] = ['department_type' => 'contributing'];
+            }
+            $degree->departments()->sync($contributing);
+        }
+
         $degree->degreeTypes()->sync($degreeTypes);
 
         return redirect()->back();
