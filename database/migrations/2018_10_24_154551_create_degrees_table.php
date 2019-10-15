@@ -18,6 +18,7 @@ class CreateDegreesTable extends Migration
             $table->string('name');
             $table->string('minor')->nullable();
             $table->string('concentration')->nullable();
+            $table->string('catalog_year')->nullable();
             $table->float('degree_credits_min')->nullable();
             $table->float('degree_credits_max')->nullable();
             $table->float('major_credits_min')->nullable();

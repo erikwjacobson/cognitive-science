@@ -14,12 +14,6 @@
                             <li class="nav-item">
                                 <a href="{{route('degree.create')}}" class="nav-link active">Degree</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled"
-                                   data-toggle="tooltip"
-                                   data-title="Finish creating the degree before adding courses."
-                                   data-placement="bottom">Courses</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="card-body">
@@ -30,9 +24,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-9">
                                 <label class="required">University Name</label>
                                 {!! Form::select('institution', $universities->pluck('name','id'), null, ['class' => 'form-control select2-single', 'required']) !!}
+                            </div>
+                            <div class="col-md-3">
+                                <label class="required">Catalog Year</label>
+                                {!! Form::select('catalog-year', $catalogYears, '2019-2020', ['class' => 'form-control select2-single', 'required']) !!}
                             </div>
                         </div>
                         <br>
@@ -65,7 +63,8 @@
                                         <label for="degree-credits-amount">Degree Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="degree-credits" id="degree-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
+                                        <input type="text" name="degree-credits" id="degree-credits-amount" readonly
+                                               style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="degree-credits"></div>
@@ -76,7 +75,8 @@
                                         <label for="major-credits-amount">Major Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="major-credits" id="major-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
+                                        <input type="text" name="major-credits" id="major-credits-amount" readonly
+                                               style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="major-credits"></div>
@@ -90,7 +90,8 @@
                                         <label for="prereq-credits-amount">Prereq Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="prereq-credits" id="prereq-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
+                                        <input type="text" name="prereq-credits" id="prereq-credits-amount" readonly
+                                               style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="prereq-credits"></div>
@@ -101,7 +102,8 @@
                                         <label for="elective-credits-amount">Elective Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="elective-credits" id="elective-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
+                                        <input type="text" name="elective-credits" id="elective-credits-amount" readonly
+                                               style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="elective-credits"></div>
@@ -112,7 +114,8 @@
                                         <label for="gened-credits-amount">Gen Ed Credits:</label>
                                     </div>
                                     <div class="col-md-5">
-                                        <input type="text" name="gened-credits" id="gened-credits-amount" readonly style="width:100%; border:0; font-weight:bold;">
+                                        <input type="text" name="gened-credits" id="gened-credits-amount" readonly
+                                               style="width:100%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="gened-credits"></div>
@@ -125,8 +128,35 @@
                                 {!! Form::text('degree-minor', null, ['class' => 'form-control']) !!}
                             </div>
                             <div class="col-md-6">
-                                <label>Concentration (if applicable)</label>
-                                {!! Form::text('degree-concentration', null, ['class' => 'form-control']) !!}
+                                <label>Specialization Type</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input name="special" class="special" type="radio" data-special="Emphasis">&nbsp;Emphasis
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input name="special" class="special" type="radio" data-special="Concentration">&nbsp;Concentration
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input name="special" class="special" type="radio" data-special="Track">&nbsp;Track
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input name="special" id="other-special" type="radio">&nbsp;Other
+                                    </div>
+                                </div>
+                                {!! Form::text('degree-concentration', null, ['class' => 'form-control', 'hidden' => 'true', 'id' => 'specialization-text']) !!}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Notes</label>
+                                {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => 4]) !!}
                             </div>
                         </div>
                         <br>
@@ -146,21 +176,36 @@
     <script>
         var sliders = ['degree-credits', 'major-credits', 'prereq-credits', 'elective-credits', 'gened-credits', 'course-credits'];
 
-        sliders.forEach(function(item, index) {
-            console.log(item);
-            $( function() {
-                $( "#" + item ).slider({
+        sliders.forEach(function (item, index) {
+            $(function () {
+                $("#" + item).slider({
                     range: true,
                     min: 0,
                     max: 200,
-                    values: [ 0, 120 ],
-                    slide: function( event, ui ) {
-                        $( "#" + item + "-amount" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                    values: [0, 120],
+                    slide: function (event, ui) {
+                        $("#" + item + "-amount").val(ui.values[0] + " - " + ui.values[1]);
                     }
                 });
-                $( "#" + item + "-amount" ).val($( "#" + item ).slider( "values", 0 ) +
-                    " - " + $( "#" + item ).slider( "values", 1 ) );
+                $("#" + item + "-amount").val($("#" + item).slider("values", 0) +
+                    " - " + $("#" + item).slider("values", 1));
             });
+        });
+
+        $('.special').on('click', function() {
+           var val = $(this).attr('data-special');
+           $('#specialization-text').val(val);
+        });
+
+        $('[name="special"]').on('click', function() {
+            var other = $('#other-special');
+            var item = $('#specialization-text');
+            if(other.is(':checked')) {
+                item.val('');
+                item.attr('hidden', false);
+            } else if (other.is(':not(:checked)')) {
+                item.attr('hidden', true);
+            }
         });
     </script>
 @endsection

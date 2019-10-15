@@ -10,6 +10,7 @@ class Degree extends Model
         'name',
         'minor',
         'concentration',
+        'catalog_year',
         'degree_credits_min',
         'degree_credits_max',
         'major_credits_min',
@@ -51,7 +52,7 @@ class Degree extends Model
      */
     public function departments()
     {
-        return $this->belongsToMany(Department::class, 'degree_department');
+        return $this->belongsToMany(Department::class, 'degree_department')->withPivot('department_type');
     }
 
     /**

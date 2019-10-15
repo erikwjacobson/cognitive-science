@@ -13,18 +13,6 @@
                                     <li class="nav-item">
                                         <a href="{{route('degree.index')}}" class="nav-link active">List</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link disabled"
-                                           data-toggle="tooltip"
-                                           data-title="Click Create New to create a new degree."
-                                           data-placement="bottom">Degree</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link disabled"
-                                           data-toggle="tooltip"
-                                           data-title="You need to create the degree before you can add courses to it."
-                                           data-placement="bottom">Courses</a>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="col-md-2 text-right">
