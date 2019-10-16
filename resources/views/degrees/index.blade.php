@@ -39,7 +39,9 @@
                                         <td>{{$degree->university->name}}</td>
                                         <td>{{$degree->courses->count()}}</td>
                                         <td>{{$degree->degree_credits_min}} - {{$degree->degree_credits_max}}</td>
-                                        <td><a href="{{route('degree.courses', $degree)}}" class="btn btn-info">Add Courses</a></td>
+                                        <td>
+                                            <a href="{{route('degree.edit', $degree)}}" class="btn btn-warning">Edit</a>
+                                            <a href="{{route('degree.courses', $degree)}}" class="btn btn-info">Add Courses</a></td>
                                     </tr>
                             @empty
                                 <tr>
