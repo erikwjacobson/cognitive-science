@@ -55,11 +55,11 @@
                                 {!! Form::select('department', $departments->pluck('name','id'), null, ['class' => 'form-control', 'id' => 'department']) !!}
                             </div>
                             <div class="col-md-2">
-                                <label class="required">Subgroup</label>
+                                <label class="required">Minimum # of Courses</label>
                                 {!! Form::select('course[subgroup]', ['NA',1,2,3,4,5,6,7,8,9,10], null, ['class' => 'form-control', 'id' => 'requirement-score-sub']) !!}
                             </div>
                             <div class="col-md-2">
-                                <label class="required">Group</label>
+                                <label class="required"># Of Alternatives</label>
                                 {!! Form::select('course[group]', ['NA',1,2,3,4,5,6,7,8,9,10], null, ['class' => 'form-control', 'id' => 'requirement-score-group']) !!}
                             </div>
                         </div>
