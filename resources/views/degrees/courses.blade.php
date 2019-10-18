@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label class="required">Course Title</label>
-                                {!! Form::text('course[title]', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Intro to Psychology']) !!}
+                                {!! Form::text('course[title]', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'E.x., Intro to Psychology']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label class="required">Course Catalog Year</label>
@@ -30,11 +30,11 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="required">Code</label>
-                                {!! Form::text('course[code]', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'PSYC']) !!}
+                                {!! Form::text('course[code]', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'E.x., PSYC']) !!}
                             </div>
                             <div class="col-md-2">
                                 <label class="required">Number</label>
-                                {!! Form::text('course[number]', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => '101']) !!}
+                                {!! Form::text('course[number]', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => 'E.x., 101']) !!}
                             </div>
                         </div>
                         <br>
