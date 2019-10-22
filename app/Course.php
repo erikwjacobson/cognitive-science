@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
 
-    protected $fillable = ['title', 'code', 'number', 'credits_min', 'credits_max', 'course_type_id', 'department_id', 'degree_id', 'standardized_title', 'requirement_score', 'notes', 'catalog_year'];
+    protected $fillable = ['title', 'code', 'number', 'credits_min', 'credits_max', 'course_type_id', 'department_id', 'degree_id', 'standardized_title', 'requirement_score', 'notes', 'catalog_year', 'required', 'methodology'];
 
     protected $appends = ['uniqueName'];
 
@@ -28,7 +28,7 @@ class Course extends Model
      */
     public function type()
     {
-        return $this->hasOne(CourseType::class);
+        return $this->hasOne(CourseType::class,'id','course_type_id');
     }
 
     /**
