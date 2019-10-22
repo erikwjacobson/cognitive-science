@@ -220,8 +220,8 @@ class DegreeController extends Controller
             'standardized_title' => $request->standard_title,
             'requirement_score' => $requirement_score,
             'notes' => $request->notes,
-            'required' => $request->required,
-            'methodology' => $request->methodology
+            'required' => (boolean) $request->required,
+            'methodology' => (boolean) $request->methodology
         ]);
 
         return response($course, 200);
