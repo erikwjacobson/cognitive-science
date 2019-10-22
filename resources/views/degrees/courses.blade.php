@@ -197,6 +197,8 @@
                     $('#requirement-score-group').val(0);
                     displayCourse(data);
                     $('#title').focus();
+                    $("input[name='course[methodology]']:checked").prop('checked',false);
+                    $("input[name='course[required]']:checked").prop('checked',false);
                 },
                 error: function(e) {
                     console.log(e);
