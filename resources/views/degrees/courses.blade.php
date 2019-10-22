@@ -65,11 +65,36 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="required">Course Type</label>
                                 {!! Form::select('course[course-type]', $courseTypes->pluck('name', 'id'), null, ['class' => 'form-control', 'id' => 'course-type']) !!}
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label class="required">Required Course</label><br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="radio" name="course[required]" id="required_true" value="true">&nbsp;Yes
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="radio" name="course[required]" id="required_false" value="false">&nbsp;No
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="required">Methodological Course</label><br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="radio" name="course[methodology]" id="method_true" value="true">&nbsp;Yes
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="radio" name="course[methodology]" id="method_true" value="false">&nbsp;No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <label>Notes</label>
                                 {!! Form::text('course[notes]', null, ['class' => 'form-control', 'id' => 'notes']) !!}
                             </div>
@@ -160,7 +185,9 @@
                     group: $('#requirement-score-group').val(),
                     course_type: $('#course-type').val(),
                     catalog_year: $('#catalog-year').val(),
-                    notes: $('#notes').val()
+                    notes: $('#notes').val(),
+                    required: $("input[name='course[required]']:checked").val(),
+                    methodology: $("input[name='course[methodology]']:checked").val()
                 },
                 success: function(data) {
                     $('.form-control').val(null);
