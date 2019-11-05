@@ -153,7 +153,7 @@ class DegreeController extends Controller
         $degree->gened_credits_min = explode(" - ", $request['gened-credits'])[0];
         $degree->gened_credits_max = explode(" - ", $request['gened-credits'])[1];
         $degree->university_id = $university->id;
-        $degree->nodes = $request['notes'];
+        $degree->notes = $request['notes'];
         $degree->save();
 
         // Sync all of the housed departments
