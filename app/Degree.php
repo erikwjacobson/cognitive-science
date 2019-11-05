@@ -22,7 +22,8 @@ class Degree extends Model
         'gened_credits_min',
         'gened_credits_max',
         'university_id',
-        'department_id'
+        'department_id',
+        'notes'
     ];
 
     /**
