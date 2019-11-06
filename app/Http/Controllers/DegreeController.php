@@ -84,23 +84,20 @@ class DegreeController extends Controller
         ]);
         $degree->save();
 
+        $departments = [];
         // Sync all of the housed departments
         $housed_departments = Department::whereIn('id', $request->housed_departments)->get();
-        $housed = [];
         foreach($housed_departments as $dept){
-            $housed[$dept->id] = ['department_type' => 'housed'];
+            $departments[$dept->id] = ['department_type' => 'housed'];
         }
-        $degree->departments()->sync($housed);
-
         // If there are contributing departments, sync them
         if($request->contributing_departments) {
             $contributing_departments = Department::whereIn('id', $request->contributing_departments)->get();
-            $contributing = [];
             foreach($contributing_departments as $dept){
-                $contributing[$dept->id] = ['department_type' => 'contributing'];
+                $departments[$dept->id] = ['department_type' => 'contributing'];
             }
-            $degree->departments()->sync($contributing);
         }
+        $degree->departments()->sync($departments);
 
         // Sync the degree types
         $degreeTypes = DegreeType::whereIn('id', $request->degreeTypes)->get();
@@ -118,8 +115,9 @@ class DegreeController extends Controller
     public function edit(Degree $degree)
     {
         $departments = Department::all();
-        $contributing = $degree->departments()->wherePivot('department_type', 'contributing');
-        $housed = $degree->departments()->wherePivot('department_type', 'housed');
+        $contributing = $degree->departments()->wherePivot('department_type', 'contributing')->get();
+        $housed = $degree->departments()->wherePivot('department_type', 'housed')->get();
+
         $degreeTypes = DegreeType::all();
         $universities = University::all();
         $catalogYears = $this->catalogYears;
@@ -156,24 +154,20 @@ class DegreeController extends Controller
         $degree->notes = $request['notes'];
         $degree->save();
 
+        $departments = [];
         // Sync all of the housed departments
         $housed_departments = Department::whereIn('id', $request->housed_departments)->get();
-        $housed = [];
         foreach($housed_departments as $dept){
-            $housed[$dept->id] = ['department_type' => 'housed'];
+            $departments[$dept->id] = ['department_type' => 'housed'];
         }
-        $degree->departments()->sync($housed);
-
         // If there are contributing departments, sync them
         if($request->contributing_departments) {
             $contributing_departments = Department::whereIn('id', $request->contributing_departments)->get();
-            $contributing = [];
             foreach($contributing_departments as $dept){
-                $contributing[$dept->id] = ['department_type' => 'contributing'];
+                $departments[$dept->id] = ['department_type' => 'contributing'];
             }
-            $degree->departments()->sync($contributing);
         }
-
+        $degree->departments()->sync($departments);
         $degree->degreeTypes()->sync($degreeTypes);
 
         return redirect()->back();
