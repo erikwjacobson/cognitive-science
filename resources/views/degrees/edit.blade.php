@@ -47,11 +47,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="required">Housed Department(s)</label>
-                                {!! Form::select('housed_departments[]', $departments->pluck('name','id'), $housed->pluck('department_id'), ['class' => 'form-control select2-multiple', 'multiple' => 'multiple']) !!}
+                                {!! Form::select('housed_departments[]', $departments->pluck('name','id'), $housed->pluck('id'), ['class' => 'form-control select2-multiple', 'multiple' => 'multiple']) !!}
                             </div>
                             <div class="col-md-6">
                                 <label>Contributing Department(s)</label>
-                                {!! Form::select('contributing_departments[]', $departments->pluck('name','id'), $contributing->pluck('department_id'), ['class' => 'form-control select2-multiple', 'multiple' => 'multiple']) !!}
+                                {!! Form::select('contributing_departments[]', $departments->pluck('name','id'), $contributing->pluck('id'), ['class' => 'form-control select2-multiple', 'multiple' => 'multiple']) !!}
                             </div>
                         </div>
                         <br>
