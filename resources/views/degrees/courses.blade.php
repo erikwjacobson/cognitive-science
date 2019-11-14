@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+
                     <div class="card-header">
                         <h3>Create Courses for {{$degree->name}} at {{$degree->university->name}}</h3>
                         <ul class="nav nav-tabs card-header-tabs">
@@ -19,22 +20,23 @@
                         </ul>
                     </div>
                     <div class="card-body">
+                        {!! Form::open(['route' => ['degree.courses.store', $degree], 'method' => 'POST']) !!}
                         <div class="row">
                             <div class="col-md-4">
                                 <label class="required">Course Title</label>
-                                {!! Form::text('course[title]', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'E.x., Intro to Psychology']) !!}
+                                {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'E.x., Intro to Psychology']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label class="required">Course Catalog Year</label>
-                                {!! Form::select('course[catalog_year]', $catalogYears, $degree->catalog_year, ['class' => 'form-control', 'id' => 'catalog-year']) !!}
+                                {!! Form::select('catalog_year', $catalogYears, $degree->catalog_year, ['class' => 'form-control', 'id' => 'catalog-year']) !!}
                             </div>
                             <div class="col-md-2">
                                 <label class="required">Code</label>
-                                {!! Form::text('course[code]', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'E.x., PSYC']) !!}
+                                {!! Form::text('code', null, ['class' => 'form-control', 'id' => 'code', 'placeholder' => 'E.x., PSYC']) !!}
                             </div>
                             <div class="col-md-2">
                                 <label class="required">Number</label>
-                                {!! Form::text('course[number]', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => 'E.x., 101']) !!}
+                                {!! Form::text('number', null, ['class' => 'form-control', 'id' => 'number', 'placeholder' => 'E.x., 101']) !!}
                             </div>
                         </div>
                         <br>
@@ -45,7 +47,7 @@
                                         <label for="course-credits-amount" class="required">Course Credits:</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="course[credits]" id="course-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
+                                        <input type="text" name="credits" id="course-credits-amount" readonly style="width:75%; border:0; font-weight:bold;">
                                     </div>
                                 </div>
                                 <div id="course-credits"></div>
@@ -56,27 +58,27 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="required">Minimum # of Courses</label>
-                                {!! Form::select('course[subgroup]', ['NA',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40], null, ['class' => 'form-control select2-single', 'id' => 'requirement-score-sub']) !!}
+                                {!! Form::select('subgroup', ['NA',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40], null, ['class' => 'form-control select2-single', 'id' => 'requirement-score-sub']) !!}
                             </div>
                             <div class="col-md-2">
                                 <label class="required"># Of Alternatives</label>
-                                {!! Form::select('course[group]', ['NA',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40], null, ['class' => 'form-control  select2-single', 'id' => 'requirement-score-group']) !!}
+                                {!! Form::select('group', ['NA',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40], null, ['class' => 'form-control  select2-single', 'id' => 'requirement-score-group']) !!}
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4">
                                 <label class="required">Course Type</label>
-                                {!! Form::select('course[course-type]', $courseTypes->pluck('name', 'id'), null, ['class' => 'form-control', 'id' => 'course-type']) !!}
+                                {!! Form::select('course_type', $courseTypes->pluck('name', 'id'), null, ['class' => 'form-control', 'id' => 'course-type']) !!}
                             </div>
                             <div class="col-md-4">
                                 <label class="required">Required Course</label><br>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <input type="radio" name="course[required]" id="required_true" value="true">&nbsp;Yes
+                                        <input type="radio" name="required" id="required_true" value="true">&nbsp;Yes
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="radio" name="course[required]" id="required_false" value="false">&nbsp;No
+                                        <input type="radio" name="required" id="required_false" value="false">&nbsp;No
                                     </div>
                                 </div>
                             </div>
@@ -84,10 +86,10 @@
                                 <label class="required">Methodological Course</label><br>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <input type="radio" name="course[methodology]" id="method_true" value="true">&nbsp;Yes
+                                        <input type="radio" name="methodology" id="method_true" value="true">&nbsp;Yes
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="radio" name="course[methodology]" id="method_true" value="false">&nbsp;No
+                                        <input type="radio" name="methodology" id="method_false" value="false">&nbsp;No
                                     </div>
                                 </div>
                             </div>
@@ -96,16 +98,17 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label>Notes</label>
-                                {!! Form::text('course[notes]', null, ['class' => 'form-control', 'id' => 'notes']) !!}
+                                {!! Form::text('notes', null, ['class' => 'form-control', 'id' => 'notes']) !!}
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-12 text-right">
-                                <button onclick="addCourse()" class="btn btn-lg btn-primary">Add</button>
+                                <button type="submit" class="btn btn-lg btn-primary">Add</button>
                             </div>
                         </div>
                         <br>
+                        {!! Form::close() !!}
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>Current Courses for {{$degree->name}} at {{$degree->university->name}}</h3>
@@ -123,7 +126,11 @@
                                     </thead>
                                     <tbody>
                                     @foreach($courses as $course)
-                                        <tr>
+                                        @if($loop->first)
+                                            <tr class="table-success">
+                                        @else
+                                            <tr>
+                                        @endif
                                             <td>{{$course->code}}</td>
                                             <td>{{$course->number}}</td>
                                             <td>{{$course->title}}</td>
@@ -166,45 +173,6 @@
             $( "#course-credits-amount" ).val($( "#course-credits" ).slider( "values", 0 ) +
                 " - " + $( "#course-credits" ).slider( "values", 1 ) );
         });
-
-        /**
-         * Ajax submit of the course
-         */
-        function addCourse() {
-            $.ajax({
-                method: "POST",
-                url: '{{ route('degree.courses.store', $degree) }}',
-                data: {
-                    title: $('#title').val(),
-                    code: $('#code').val(),
-                    number: $('#number').val(),
-                    credits: $('#course-credits-amount').val(),
-                    department: $('#department').val(),
-                    standard_title: $('#standard-title').val(),
-                    subgroup: $('#requirement-score-sub').val(),
-                    group: $('#requirement-score-group').val(),
-                    course_type: $('#course-type').val(),
-                    catalog_year: $('#catalog-year').val(),
-                    notes: $('#notes').val(),
-                    required: $("input[name='course[required]']:checked").val(),
-                    methodology: $("input[name='course[methodology]']:checked").val()
-                },
-                success: function(data) {
-                    $('.form-control').val(null);
-                    $('#course-type').val(1);
-                    $('#department').val(1);
-                    $('#requirement-score-sub').val(0);
-                    $('#requirement-score-group').val(0);
-                    displayCourse(data);
-                    $('#title').focus();
-                    $("input[name='course[methodology]']:checked").prop('checked',false);
-                    $("input[name='course[required]']:checked").prop('checked',false);
-                },
-                error: function(e) {
-                    console.log(e);
-                }
-            });
-        }
 
         /**
          * Display the course on the page

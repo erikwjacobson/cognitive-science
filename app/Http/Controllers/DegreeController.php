@@ -61,6 +61,12 @@ class DegreeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'degree-name' => 'required',
+            'housed_departments' => 'required',
+            'degreeTypes' => 'required'
+        ]);
+        
         $university = University::findOrFail($request->institution);
 
         // Create the degree
@@ -196,7 +202,15 @@ class DegreeController extends Controller
      */
     public function storeCourse(Degree $degree, Request $request)
     {
-//        return $request->all();
+        $request->validate([
+            'title' => 'required',
+            'code' => 'required',
+            'number' => 'required',
+            'department' => 'required',
+            'required' => 'required',
+            'methodology' => 'required'
+        ]);
+
         $department = Department::findOrFail($request->department);
 
         $requirement_score = $request->subgroup != 0 || $request->group != 0 ? $request->subgroup / $request->group : 0;
@@ -218,7 +232,7 @@ class DegreeController extends Controller
             'methodology' => (boolean) $request->methodology
         ]);
 
-        return response($course, 200);
+        return redirect()->back();
     }
 
 
