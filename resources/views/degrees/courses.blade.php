@@ -121,7 +121,7 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Credits</th>
                                         <th scope="col">Req. Score</th>
-                                        <th scope="col">Options</th>
+                                        <th scope="col" colspan="2">Options</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -136,6 +136,9 @@
                                             <td>{{$course->title}}</td>
                                             <td>{{$course->credits_min}} - {{$course->credits_max}}</td>
                                             <td>{{$course->requirement_score}}</td>
+                                            <td>
+                                                <a href="{{route('degree.courses.edit', [$degree, $course])}}" class="btn btn-warning">Edit</a>
+                                            </td>
                                             <td>
                                                 {!! Form::open(['route' => ['degree.course.delete', $degree, $course], 'method' => 'DELETE', 'onsubmit' => 'return confirm(\'Are you sure you want to delete this course?\');']) !!}
                                                     <button type="submit" class="btn btn-danger">x</button>
@@ -156,6 +159,9 @@
         {!! Form::open(['route' => ['degree.course.delete', $degree, '9999999999'], 'method' => 'DELETE', 'onsubmit' => 'return confirm(\'Are you sure you want to delete this course?\');']) !!}
             <button type="submit" class="btn btn-danger">x</button>
         {!! Form::close() !!}
+    </div>
+    <div id="course-edit-template" style="display: none;">
+        <a href="{{route('degree.courses.edit', [$degree, 9999999999])}}" class="btn btn-warning">Edit</a>
     </div>
 @endsection
 @section('portalScripts')
@@ -181,7 +187,8 @@
         {
             $('#current-courses > tbody > tr').removeClass('table-success');
 
-            var button = getDeleteButton(data.id);
+            var deleteButton = getDeleteButton(data.id);
+            var editButton = getEditButton(data.id);
             var tableStr =
                 '<tr class="table-success">' +
                     '<td>' + data.code + '</td>' +
@@ -189,7 +196,8 @@
                     '<td>' + data.title + '</td>' +
                     '<td>' + data.credits_min + ' - ' + data.credits_max + '</td>' +
                     '<td>' + data.requirement_score + '</td>' +
-                    '<td>' + button + '</td>' +
+                    '<td>' + editButton + '</td>' +
+                    '<td>' + deleteButton + '</td>' +
                 '</tr>';
 
             var firstRow = $('#current-courses > tbody > tr:first');
@@ -209,6 +217,20 @@
         function getDeleteButton(id)
         {
             var button = $('#course-delete-template').html();
+            button = button.replace('9999999999', id);
+
+            return button;
+        }
+
+        /**
+         * Create the new delete button with the id passed in
+         *
+         * @param id
+         * @returns {*|React.DetailedReactHTMLElement<React.HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>|void|jQuery}
+         */
+        function getEditButton(id)
+        {
+            var button = $('#course-edit-template').html();
             button = button.replace('9999999999', id);
 
             return button;
