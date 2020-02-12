@@ -206,10 +206,17 @@ class DegreeController extends Controller
         $catalogYears = $this->catalogYears;
         return view('degrees.courses.edit', compact('degree', 'courseTypes', 'departments', 'course', 'catalogYears'));
     }
-
+    
+    /**
+     * Update an existing course
+     * 
+     * @param Degree $degree
+     * @param Course $course
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function updateCourse(Degree $degree, Course $course, Request $request) 
     {
-
         $request->validate([
             'title' => 'required',
             'code' => 'required',
