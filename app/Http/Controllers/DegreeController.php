@@ -194,6 +194,64 @@ class DegreeController extends Controller
     }
 
     /**
+     * Displays edit course view
+     * @param Degree $degree
+     * @param Course $course
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editCourse(Degree $degree, Course $course)
+    {
+        $courseTypes = CourseType::all();
+        $departments = Department::all();
+        $catalogYears = $this->catalogYears;
+        return view('degrees.courses.edit', compact('degree', 'courseTypes', 'departments', 'course', 'catalogYears'));
+    }
+    
+    /**
+     * Update an existing course
+     * 
+     * @param Degree $degree
+     * @param Course $course
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function updateCourse(Degree $degree, Course $course, Request $request) 
+    {
+        $request->validate([
+            'title' => 'required',
+            'code' => 'required',
+            'number' => 'required',
+            'department' => 'required',
+            'required' => 'required',
+            'methodology' => 'required',
+            'subgroup' => 'required|numeric',
+            'group' => 'required|numeric'
+        ]);
+
+        $department = Department::findOrFail($request->department);
+
+        $requirement_score = $request->subgroup != 0 || $request->group != 0 ? $request->subgroup / $request->group : 0;
+
+        $course->title = $request->title;
+        $course->code = $request->code;
+        $course->number = $request->number;
+        $course->catalog_year = $request->catalog_year;
+        $course->credits_min = explode(' - ', $request->credits)[0];
+        $course->credits_max = explode(' - ', $request->credits)[1];
+        $course->department_id = $department->id;
+        $course->course_type_id = $request->course_type;
+        $course->degree_id = $degree->id;
+        $course->standardized_title = $request->standard_title;
+        $course->requirement_score = $requirement_score;
+        $course->notes = $request->notes;
+        $course->required = (boolean) $request->required;
+        $course->methodology = (boolean) $request->methodology;
+        $course->save();
+
+        return redirect()->route('degree.courses', $degree);
+    }
+
+    /**
      * Store courses
      *
      * @param Degree $degree
