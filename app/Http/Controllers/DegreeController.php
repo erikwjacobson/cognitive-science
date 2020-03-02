@@ -243,6 +243,8 @@ class DegreeController extends Controller
         $course->degree_id = $degree->id;
         $course->standardized_title = $request->standard_title;
         $course->requirement_score = $requirement_score;
+        $course->subgroup = $request->subgroup;
+        $course->group = $request->group;
         $course->notes = $request->notes;
         $course->required = (boolean) $request->required;
         $course->methodology = (boolean) $request->methodology;
@@ -285,6 +287,8 @@ class DegreeController extends Controller
             'degree_id' => $degree->id,
             'standardized_title' => $request->standard_title,
             'requirement_score' => $requirement_score,
+            'subgroup' => $request->subgroup,
+            'group' => $request->group,
             'notes' => $request->notes,
             'required' => (boolean) $request->required,
             'methodology' => (boolean) $request->methodology
