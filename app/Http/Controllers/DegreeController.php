@@ -217,6 +217,7 @@ class DegreeController extends Controller
      */
     public function updateCourse(Degree $degree, Course $course, Request $request) 
     {
+
         $request->validate([
             'title' => 'required',
             'code' => 'required',
@@ -246,8 +247,10 @@ class DegreeController extends Controller
         $course->subgroup = $request->subgroup;
         $course->group = $request->group;
         $course->notes = $request->notes;
-        $course->required = (boolean) $request->required;
-        $course->methodology = (boolean) $request->methodology;
+        $course->required = (int) $request->required;
+        $course->methodology = (int) $request->methodology;
+
+
         $course->save();
 
         return redirect()->route('degree.courses', $degree);
@@ -290,8 +293,8 @@ class DegreeController extends Controller
             'subgroup' => $request->subgroup,
             'group' => $request->group,
             'notes' => $request->notes,
-            'required' => (boolean) $request->required,
-            'methodology' => (boolean) $request->methodology
+            'required' => (int) $request->required,
+            'methodology' => (int) $request->methodology
         ]);
 
         return redirect()->back();
