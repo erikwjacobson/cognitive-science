@@ -38,7 +38,7 @@ class Course extends Model
      */
     public function getTypeAttribute()
     {
-        return $this->type->name;
+        return $this->type()->first()->name;
     }
 
     /**
@@ -58,7 +58,7 @@ class Course extends Model
      */
     public function getDepartmentAttribute()
     {
-        return $this->department->name;
+        return $this->department()->first()->name;
     }
 
     /**
