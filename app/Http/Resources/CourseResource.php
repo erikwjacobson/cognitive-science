@@ -28,6 +28,7 @@ class CourseResource extends JsonResource
             'course_degree_title' => $this->degree->name,
             'course_subgroup_count' => $this->subgroup,
             'course_group_count' => $this->group,
+            'course_requirement_score' => $this->requirement_score,
             'course_is_required' => $this->required,
             'course_is_methods' => $this->methodology,
             'course_notes' => $this->notes,
